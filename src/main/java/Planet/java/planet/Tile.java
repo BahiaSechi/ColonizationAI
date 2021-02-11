@@ -1,11 +1,8 @@
-package Planet.java;
-
-import javafx.scene.image.Image;
+package Planet.java.planet;
 
 public class Tile {
 
     private int tileX, tileY, tileWidth, tileHeight;
-    private Image tileImg;
 
     // Constructor
     public Tile(int tileX, int tileY, int tileWidth, int tileHeight) {
@@ -47,13 +44,5 @@ public class Tile {
 
     public void setTileHeight(int tileHeight) {
         this.tileHeight = tileHeight;
-    }
-
-    public Image getTileImg() {
-        return tileImg;
-    }
-
-    public void setTileImg(Image tileImg) {
-        this.tileImg = tileImg;
     }
 }
