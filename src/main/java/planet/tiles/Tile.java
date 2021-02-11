@@ -12,6 +12,9 @@ public class Tile {
         this.tileHeight = tileHeight;
     }
 
+    // TODO Implement exploit
+    public void exploit() {}
+
     // Getters & Setters
 
     public int getTileX() {
