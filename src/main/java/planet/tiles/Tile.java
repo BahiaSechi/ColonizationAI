@@ -1,6 +1,6 @@
 package planet.tiles;
 
-public class Tile {
+public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
 
