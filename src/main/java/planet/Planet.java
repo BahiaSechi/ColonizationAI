@@ -1,4 +1,4 @@
-package Planet.java.planet;
+package planet;
 
 public class Planet {
 
