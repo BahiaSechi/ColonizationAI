@@ -16,4 +16,12 @@ public abstract class MoveStrategy {
     }
 
     abstract void nextMove(Robot robot);
+
+    public Pos getCurrentPos() {
+        return currentPos;
+    }
+
+    public void setCurrentPos(Pos currentPos) {
+        this.currentPos = currentPos;
+    }
 }
