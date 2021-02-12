@@ -1,4 +1,5 @@
 import planet.Planet;
+import planet.exception.MissingTileTypeException;
 import planet.tiles.Tile;
 import planet.tiles.TileType;
 
@@ -12,6 +13,10 @@ public class Main {
         System.out.println(tile.getType());
 
         Planet p = new Planet();
-        p.intialize();
+        try {
+            p.intialize();
+        } catch (MissingTileTypeException e) {
+            e.printStackTrace();
+        }
     }
 }
