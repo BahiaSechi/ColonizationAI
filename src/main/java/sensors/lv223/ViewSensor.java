@@ -1,4 +1,4 @@
-package sensors;
+package sensors.lv223;
 
 import planet.Planet;
 import planet.Tile;
@@ -8,7 +8,7 @@ import robots.Robot;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ViewSensorLV223 {
+public abstract class ViewSensor {
     Planet planet;
 
     List<Tile> exploitableSurrounding(Robot robot) {
