@@ -8,6 +8,7 @@ import planet.tiles.TileType;
 public class Planet implements Observer {
 
     private Tile[][] map;
+    private Tile[] recentlyChangedTiles;
     private final int SIZE_X = 21;
     private final int SIZE_Y = 21;
     private final int[][] squeleton = {
@@ -70,8 +71,8 @@ public class Planet implements Observer {
         afficheDebug();
     }
 
-    public Tile[][] getRecentChanges() {
-        return this.map;
+    public Tile[] getRecentlyChangedTiles() {
+        return this.recentlyChangedTiles;
     }
 
     public void update() {
@@ -81,7 +82,6 @@ public class Planet implements Observer {
     private void afficheDebug() {
         for (int y = 0; y < SIZE_X; y++) {
             for (int x = 0; x < SIZE_Y; x++) {
-                //"'%15s' %n", "baeldung"
                 System.out.printf("'%14s' ", map[y][x].getType());
             }
             System.out.println();
