@@ -2,14 +2,23 @@ package robots;
 
 import robots.moves.MoveStrategy;
 import robots.states.State;
+import sensors.lv223.ViewSensor;
 
 
 public class Robot {
     MoveStrategy movement;
     RobotController controller;
     private State state;
-    private double epsilon = 0.5;
+    private double epsilon;
+    private ViewSensor viewSensor;
 
+    public Robot(MoveStrategy movement, RobotController controller, State state, double epsilon, ViewSensor viewSensor) {
+        this.movement = movement;
+        this.controller = controller;
+        this.state = state;
+        this.epsilon = epsilon;
+        this.viewSensor = viewSensor;
+    }
 
     public void nextMove() {
         if (state.nextMove(this))
@@ -38,5 +47,21 @@ public class Robot {
 
     public void setMovement(MoveStrategy movement) {
         this.movement = movement;
+    }
+
+    public double getEpsilon() {
+        return epsilon;
+    }
+
+    public void setEpsilon(double epsilon) {
+        this.epsilon = epsilon;
+    }
+
+    public ViewSensor getViewSensor() {
+        return viewSensor;
+    }
+
+    public void setViewSensor(ViewSensor viewSensor) {
+        this.viewSensor = viewSensor;
     }
 }
