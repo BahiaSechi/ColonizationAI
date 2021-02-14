@@ -1,5 +1,6 @@
 package robots.moves;
 
+import planet.Tile;
 import robots.Pos;
 import robots.Robot;
 
@@ -16,6 +17,11 @@ public abstract class MoveStrategy {
     }
 
     public boolean nextMove(Robot robot) {
+        List<Boolean> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
+        if (!surrounding.isEmpty()) {
+
+        }
+
         return currentPath.isEmpty();
     }
 
