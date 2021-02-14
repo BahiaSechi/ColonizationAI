@@ -1,16 +1,21 @@
-package planet;
+package planet.tiles;
 
-public class Tile {
+public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
+    private TileType type;
 
     // Constructor
-    public Tile(int tileX, int tileY, int tileWidth, int tileHeight) {
+    public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type) {
         this.tileX = tileX;
         this.tileY = tileY;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
+        this.type = type;
     }
+
+    // TODO Implement exploit
+    public void exploit() {}
 
     // Getters & Setters
 
@@ -44,5 +49,13 @@ public class Tile {
 
     public void setTileHeight(int tileHeight) {
         this.tileHeight = tileHeight;
+    }
+
+    public TileType getType() {
+        return type;
+    }
+
+    public void setType(TileType type) {
+        this.type = type;
     }
 }
