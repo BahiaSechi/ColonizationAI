@@ -11,11 +11,13 @@ public abstract class MoveStrategy {
 
     abstract List<Pos> findNewPath();
 
-    void toBase() {
+    public void toBase() {
         System.out.println("Retour à la base");
     }
 
-    abstract void nextMove(Robot robot);
+    public boolean nextMove(Robot robot) {
+        return currentPath.isEmpty();
+    }
 
     public Pos getCurrentPos() {
         return currentPos;
