@@ -1,4 +1,15 @@
 package robots.states;
 
-public class ToBase implements State {
+import robots.Robot;
+
+public class ToBase extends State {
+    @Override
+    public boolean nextMove(Robot robot) {
+        return false;
+    }
+
+    @Override
+    public State nextState() {
+        return null;
+    }
 }

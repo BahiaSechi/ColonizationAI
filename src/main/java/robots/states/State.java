@@ -1,4 +1,9 @@
 package robots.states;
 
-public interface State {
+import robots.Robot;
+
+public abstract class State {
+    public abstract boolean nextMove(Robot robot);
+
+    public abstract State nextState();
 }
