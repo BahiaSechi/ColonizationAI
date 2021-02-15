@@ -18,14 +18,15 @@ public class PlanetController extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         stage.setTitle("Colonisation");
         stage.setResizable(false);
 
         GridPane gridpane = new GridPane();
 
-        Image img = new Image("/sprites/world/grasstest.png");
+        //Image img = new Image("/sprites/world/grasstest.png");
+        Image img = new Image("/sprites/world/grass.png");
 
         for(int i = 0 ; i < 21 ; i++) {
             for (int j = 0; j < 21; j++) {

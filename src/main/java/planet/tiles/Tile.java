@@ -1,9 +1,12 @@
 package planet.tiles;
 
+import planet.exploitability.Exploitability;
+
 public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
     private TileType type;
+    private Exploitability exploitability;
 
     // Constructor
     public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type) {
@@ -12,6 +15,16 @@ public class Tile extends ObservableTile {
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.type = type;
+    }
+
+    // Constructor
+    public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type, Exploitability exploitability) {
+        this.tileX = tileX;
+        this.tileY = tileY;
+        this.tileWidth = tileWidth;
+        this.tileHeight = tileHeight;
+        this.type = type;
+        this.exploitability = exploitability;
     }
 
     // TODO Implement exploit
