@@ -30,7 +30,7 @@ public class PlanetController extends Application {
         for(int i = 0 ; i < planet.getSIZE_Y() ; i++) {
             for (int j = 0; j < planet.getSIZE_X(); j++) {
 
-                Image img = new Image(tile[i][j].getType().getNameFile());
+                Image img = new Image(tile[j][i].getType().getNameFile());
 
                 ImageView imgView = new ImageView();
                 imgView.setFitHeight(20);
