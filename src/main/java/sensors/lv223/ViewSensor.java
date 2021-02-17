@@ -11,18 +11,14 @@ import java.util.stream.Collectors;
 public abstract class ViewSensor {
     Planet planet;
 
-    List<Tile> exploitableSurrounding(Robot robot) {
+    public List<Boolean> exploitableSurrounding(Robot robot) {
         System.out.println("Je regarde les alentours...");
         Pos absolutePos = robot.getController().getAbsolutePos(robot);
 
-//        List<Tile> exploitableSurrounding = planet.getSurrounding(absolutePos)
-//                .stream()
-//                .map(this::isExploitable)
-//                .collect(Collectors.toList());
-
-        List<Tile> exploitableSurrounding = List.of(null);
-
-        return exploitableSurrounding;
+        return planet.getSurrounding(absolutePos)
+                .stream()
+                .map(this::isExploitable)
+                .collect(Collectors.toList());
     }
 
     abstract boolean isExploitable(Tile tile);
