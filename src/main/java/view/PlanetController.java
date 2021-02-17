@@ -1,15 +1,14 @@
 package view;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import simulation.planet.Planet;
+import simulation.Game;
+import simulation.planet.tiles.Tile;
 
 public class PlanetController extends Application {
 
@@ -24,17 +23,20 @@ public class PlanetController extends Application {
         stage.setResizable(false);
 
         GridPane gridpane = new GridPane();
+        Game game = new Game();
+        Planet planet = game.getPlanet();
+        Tile[][] tile = planet.getMap();
 
-        //Image img = new Image("/sprites/world/grasstest.png");
-        Image img = new Image("/sprites/world/grass.png");
+        for(int i = 0 ; i < planet.getSIZE_Y() ; i++) {
+            for (int j = 0; j < planet.getSIZE_X(); j++) {
 
-        for(int i = 0 ; i < 21 ; i++) {
-            for (int j = 0; j < 21; j++) {
+                Image img = new Image(tile[i][j].getType().getNameFile());
+
                 ImageView imgView = new ImageView();
                 imgView.setFitHeight(20);
                 imgView.setFitWidth(20);
                 imgView.setImage(img);
-                gridpane.setConstraints(imgView, i, j);
+                GridPane.setConstraints(imgView, i, j);
                 gridpane.getChildren().addAll(imgView);
             }
         }
@@ -43,6 +45,5 @@ public class PlanetController extends Application {
         stage.setScene(new Scene(gridpane, gridpane.getVgap(), gridpane.getHgap()));
 
         stage.show();
-
     }
 }
