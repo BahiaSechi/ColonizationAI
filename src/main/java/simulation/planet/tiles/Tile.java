@@ -2,8 +2,7 @@ package simulation.planet.tiles;
 
 import simulation.planet.exploitability.Exploitability;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Tile extends ObservableTile {
 
@@ -22,6 +21,7 @@ public class Tile extends ObservableTile {
         this.type = type;
         this.exploitability = exploitability;
         this.metamorphoses = metamorphoses;
+        this.metamorphoses.sort(Comparator.comparing(m -> m.percentage));
     }
 
     // TODO Implement exploit
@@ -67,5 +67,26 @@ public class Tile extends ObservableTile {
 
     public void setType(TileType type) {
         this.type = type;
+    }
+
+    public TileType nextTile() {
+        // Find a random number to find the next tile
+        Random r = new Random();
+        int low = 0;
+        int high = 10000;
+        int tmpResult = r.nextInt(high-low) + low;
+        float result = tmpResult/100.0f;
+
+        TileType tileType = this.type;
+
+        // the proportions are already sorted in the constructor
+        for (Metamorphosis m : this.metamorphoses) {
+            if (result < m.percentage) {
+                tileType = m.tiletype;
+                break;
+            }
+        }
+
+        return tileType;
     }
 }

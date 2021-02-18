@@ -70,7 +70,6 @@ public class Planet implements Observer {
                 map[y][x] = tileFactory.createTile(x, y, 10, 10, type);
             }
         }
-
         afficheDebug();
     }
 
@@ -88,11 +87,17 @@ public class Planet implements Observer {
 
     public int[][] getInitialState() { return initialState; }
 
-    public void update() { }
+    public void update() {
+        for (int y = 0; y < SIZE_Y; y++) {
+            for (int x = 0; x < SIZE_X; x++) {
+                map[y][x] = tileFactory.createTile(x,y,10, 10, map[y][x].nextTile());
+            }
+        }
+    }
 
     private void afficheDebug() {
-        for (int y = 0; y < SIZE_X; y++) {
-            for (int x = 0; x < SIZE_Y; x++) {
+        for (int y = 0; y < SIZE_Y; y++) {
+            for (int x = 0; x < SIZE_X; x++) {
                 System.out.printf("'%14s' ", map[y][x].getType());
             }
             System.out.println();
