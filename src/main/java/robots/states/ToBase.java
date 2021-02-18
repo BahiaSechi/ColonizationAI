@@ -2,9 +2,11 @@ package robots.states;
 
 import robots.Robot;
 
+import java.util.Optional;
+
 public class ToBase extends State {
     @Override
-    public boolean nextMove(Robot robot) {
+    public Optional<State> nextMove(Robot robot) {
         return false;
     }
 

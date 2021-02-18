@@ -12,4 +12,8 @@ public class Planet {
     public List<Tile> getSurrounding(Pos absolutePos) {
         return List.of(null);
     }
+
+    public Tile getTile(int x, int y) {
+        return map[x][y];
+    }
 }

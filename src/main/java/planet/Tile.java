@@ -45,4 +45,9 @@ public class Tile {
     public void setTileHeight(int tileHeight) {
         this.tileHeight = tileHeight;
     }
+
+    // TODO: Do this method for real
+    public TileType getType() {
+        return TileType.ORE;
+    }
 }
