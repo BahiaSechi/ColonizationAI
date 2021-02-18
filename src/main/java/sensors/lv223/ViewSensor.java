@@ -12,7 +12,6 @@ public abstract class ViewSensor {
     Planet planet;
 
     public Map<Pos, Double> exploitableSurrounding(Robot robot) {
-        System.out.println("Je regarde les alentours...");
         Pos absolutePos = robot.getController().getAbsolutePos(robot);
 
         return planet.getSurrounding(absolutePos)
