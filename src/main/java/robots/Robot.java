@@ -6,8 +6,8 @@ import sensors.lv223.ViewSensor;
 
 
 public class Robot {
-    MoveStrategy movement;
-    RobotController controller;
+    private MoveStrategy movement;
+    private RobotController controller;
     private State state;
     private double epsilon;
     private ViewSensor viewSensor;

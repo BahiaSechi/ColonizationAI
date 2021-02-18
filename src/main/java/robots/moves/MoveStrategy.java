@@ -1,10 +1,10 @@
 package robots.moves;
 
-import planet.Tile;
 import robots.Pos;
 import robots.Robot;
 
 import java.util.List;
+import java.util.Map;
 
 public abstract class MoveStrategy {
     private List<Pos> currentPath;
@@ -17,9 +17,12 @@ public abstract class MoveStrategy {
     }
 
     public boolean nextMove(Robot robot) {
-        List<Boolean> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
+        Map<Pos, Double> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
         if (!surrounding.isEmpty()) {
+            Pos maxPos = surrounding.entrySet().stream()
+                    .max((tile1, tile2) -> tile1.getValue() >= tile2.getValue() ? 1 : -1).get().getKey();
 
+            setCurrentPos(maxPos);
         }
 
         return currentPath.isEmpty();
