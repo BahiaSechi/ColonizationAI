@@ -3,6 +3,7 @@ package simulation.planet;
 import simulation.planet.exception.MissingTileTypeException;
 import simulation.planet.tiles.Observer;
 import simulation.planet.tiles.Tile;
+import simulation.planet.tiles.TileFactory;
 import simulation.planet.tiles.TileType;
 
 public class Planet implements Observer {
@@ -11,6 +12,8 @@ public class Planet implements Observer {
     private Tile[] recentlyChangedTiles;
     private final int SIZE_X = 21;
     private final int SIZE_Y = 21;
+    private TileFactory tileFactory = new TileFactory();
+
     private final int[][] squeleton = {
             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -64,7 +67,7 @@ public class Planet implements Observer {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 TileType type = TileType.getType(initialState[y][x]);
-                map[y][x] = new Tile(x, y, 10, 10, type);
+                map[y][x] = tileFactory.createTile(x, y, 10, 10, type);
             }
         }
 

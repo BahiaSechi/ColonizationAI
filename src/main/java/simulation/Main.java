@@ -8,7 +8,7 @@ public class Main {
         System.out.println("Hello !");
 
         // Tests tiles
-        Tile tile = new Tile(5,8,7,5, TileType.WATER);
+        Tile tile = new Tile(5,8,7,5, TileType.WATER, null, null);
         System.out.println(tile.getTileX());
         System.out.println(tile.getType());
 
