@@ -2,6 +2,8 @@ package simulation.planet.tiles;
 
 import simulation.planet.exception.MissingTileTypeException;
 
+import java.util.List;
+
 public enum TileType {
     WATER(0, "/sprites/world/WATER.png"),
     BASE(1, "/sprites/world/BASE.png"),
@@ -15,8 +17,11 @@ public enum TileType {
     MEADOW_NORMAL(9, "/sprites/world/MEADOW_NORMAL.png"),
     MEADOW_GREASY(10, "/sprites/world/MEADOW_GREASY.png");
 
+
     private final int number;
     private final String nameFile;
+    private List<Metamorphosis> metamorphoses;
+
 
     TileType(int number, String nameFile) {
         this.number = number;
@@ -38,5 +43,9 @@ public enum TileType {
             max = tt.number;
         }
         throw new MissingTileTypeException("There is no TileType with a number of " + nb + " Please chose a case number between " + min + " and " + max + ".");
+    }
+
+    public void setMetamorphoses(List<Metamorphosis> metamorphoses) {
+        this.metamorphoses = metamorphoses;
     }
 }

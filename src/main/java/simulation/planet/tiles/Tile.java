@@ -2,29 +2,26 @@ package simulation.planet.tiles;
 
 import simulation.planet.exploitability.Exploitability;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
     private TileType type;
     private Exploitability exploitability;
+    private List<Metamorphosis> metamorphoses;
 
     // Constructor
-    public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type) {
-        this.tileX = tileX;
-        this.tileY = tileY;
-        this.tileWidth = tileWidth;
-        this.tileHeight = tileHeight;
-        this.type = type;
-    }
-
-    // Constructor
-    public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type, Exploitability exploitability) {
+    public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type,
+                Exploitability exploitability, List<Metamorphosis> metamorphoses) {
         this.tileX = tileX;
         this.tileY = tileY;
         this.tileWidth = tileWidth;
         this.tileHeight = tileHeight;
         this.type = type;
         this.exploitability = exploitability;
+        this.metamorphoses = metamorphoses;
     }
 
     // TODO Implement exploit
