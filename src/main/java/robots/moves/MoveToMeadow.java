@@ -5,7 +5,7 @@ import robots.Pos;
 import java.util.List;
 
 public class MoveToMeadow extends MoveStrategy {
-    List<Pos> findNewPath() {
+    public List<Pos> findNewPath() {
         return null;
     }
 }

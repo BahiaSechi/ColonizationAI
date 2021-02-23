@@ -2,7 +2,10 @@ package robots;
 
 import robots.moves.MoveStrategy;
 import robots.states.State;
+import robots.tools.Tool;
 import sensors.lv223.ViewSensor;
+
+import java.util.Optional;
 
 
 public class Robot {
@@ -11,6 +14,7 @@ public class Robot {
     private State state;
     private double epsilon;
     private ViewSensor viewSensor;
+    private Tool tool;
 
     public Robot(MoveStrategy movement, RobotController controller, State state, double epsilon, ViewSensor viewSensor) {
         this.movement = movement;
@@ -21,8 +25,8 @@ public class Robot {
     }
 
     public void nextMove() {
-        if (state.nextMove(this))
-            state = state.nextState();
+        Optional<State> newState = state.nextMove(this);
+        newState.ifPresent(value -> state = value);
     }
 
     public State getState() {
@@ -63,5 +67,13 @@ public class Robot {
 
     public void setViewSensor(ViewSensor viewSensor) {
         this.viewSensor = viewSensor;
+    }
+
+    public Tool getTool() {
+        return tool;
+    }
+
+    public void setTool(Tool tool) {
+        this.tool = tool;
     }
 }

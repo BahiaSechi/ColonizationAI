@@ -7,7 +7,11 @@ import java.util.Optional;
 public class UsingTool extends State {
     @Override
     public Optional<State> nextMove(Robot robot) {
-        return false;
+        if (robot.getViewSensor().isCurrentExploitable(robot) > 0.0) {
+             robot.getTool().use(robot);
+        }
+
+        return Optional.empty();
     }
 
     @Override
