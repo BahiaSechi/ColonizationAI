@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class MoveStrategy {
     private List<Pos> currentPath;
-    private Pos currentPos;
+    private Pos       currentPos;
 
     abstract List<Pos> findNewPath();
 
