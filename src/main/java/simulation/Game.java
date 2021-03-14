@@ -18,6 +18,8 @@ public class Game {
         }
     }
 
-    public Planet getPlanet() { return planet; }
+    public Planet getPlanet() {
+        return planet;
+    }
 }
 

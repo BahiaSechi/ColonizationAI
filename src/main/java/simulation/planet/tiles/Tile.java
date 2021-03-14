@@ -7,8 +7,8 @@ import java.util.*;
 public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
-    private TileType type;
-    private Exploitability exploitability;
+    private TileType            type;
+    private Exploitability      exploitability;
     private List<Metamorphosis> metamorphoses;
 
     // Constructor
@@ -22,10 +22,13 @@ public class Tile extends ObservableTile {
         this.exploitability = exploitability;
         this.metamorphoses = metamorphoses;
         this.metamorphoses.sort(Comparator.comparing(m -> m.percentage));
+        // Sort the metamorphoses possibilities, this way we can directly draw a random number and compare it to the
+        // percentages.
     }
 
     // TODO Implement exploit
-    public void exploit() {}
+    public void exploit() {
+    }
 
     // Getters & Setters
 
@@ -74,8 +77,8 @@ public class Tile extends ObservableTile {
         Random r = new Random();
         int low = 0;
         int high = 10000;
-        int tmpResult = r.nextInt(high-low) + low;
-        float result = tmpResult/100.0f;
+        int tmpResult = r.nextInt(high - low) + low;
+        float result = tmpResult / 100.0f;
 
         TileType tileType = this.type;
 

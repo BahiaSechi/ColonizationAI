@@ -18,9 +18,9 @@ public enum TileType {
     MEADOW_GREASY(10, "/sprites/world/MEADOW_GREASY.png");
 
 
-    private final int number;
-    private final String nameFile;
-    private List<Metamorphosis> metamorphoses;
+    private final int                 number;
+    private final String              nameFile;
+    private       List<Metamorphosis> metamorphoses;
 
 
     TileType(int number, String nameFile) {
@@ -32,12 +32,14 @@ public enum TileType {
         return number;
     }
 
-    public String getNameFile() { return nameFile; }
+    public String getNameFile() {
+        return nameFile;
+    }
 
     public static TileType getType(int nb) throws MissingTileTypeException {
         int min = 0;
         int max = 0;
-        for(TileType tt : TileType.values()) {
+        for (TileType tt : TileType.values()) {
             if (tt.number == nb)
                 return tt;
             max = tt.number;
