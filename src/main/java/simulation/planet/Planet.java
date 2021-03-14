@@ -1,10 +1,17 @@
 package simulation.planet;
 
+import com.fuzzylite.Engine;
+import com.fuzzylite.imex.FllImporter;
+import com.fuzzylite.variable.InputVariable;
+import com.fuzzylite.variable.OutputVariable;
 import simulation.planet.exception.MissingTileTypeException;
 import simulation.planet.tiles.Observer;
 import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileFactory;
 import simulation.planet.tiles.TileType;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Planet implements Observer {
 
@@ -70,7 +77,6 @@ public class Planet implements Observer {
                 map[y][x] = tileFactory.createTile(x, y, 10, 10, type);
             }
         }
-        afficheDebug();
     }
 
     public Tile[] getRecentlyChangedTiles() {
@@ -101,6 +107,37 @@ public class Planet implements Observer {
                 System.out.printf("'%14s' ", map[y][x].getType());
             }
             System.out.println();
+        }
+    }
+
+    public void metamorphosisLogic() {
+
+        File fileFLL = new File("../resources/fuzzylogic/Metamorphosis.fll");
+
+        try {
+
+            Engine engine = new FllImporter().fromFile(fileFLL);
+
+            StringBuilder status = new StringBuilder();
+            if (!engine.isReady(status))
+                throw new RuntimeException("[engine error] engine is not ready:n" + status);
+
+            InputVariable sampledOre = engine.getInputVariable("sampledOre");
+            InputVariable drawnedWater = engine.getInputVariable("drawnedWater");
+
+            OutputVariable metamorphosis = engine.getOutputVariable("metamorphosis");
+
+//            for (int i = 0; i <= 50; ++i){
+//                double location = obstacle.getMinimum() + i * (obstacle.range() / 50);
+//                obstacle.setValue(location);
+//                engine.process();
+//                FuzzyLite.logger().info(String.format(
+//                        "obstacle.input = %s -> steer.output = %s",
+//                        Op.str(location), Op.str(steer.getValue())));
+//            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
