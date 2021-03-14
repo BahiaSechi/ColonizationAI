@@ -20,6 +20,7 @@ public class Planet implements Observer {
     private final int         SIZE_X      = 21;
     private final int         SIZE_Y      = 21;
     private       TileFactory tileFactory = new TileFactory();
+    private Engine engine = null;
 
     /** The skeleton of the planet */
     private final int[][] skeleton = {
@@ -79,6 +80,26 @@ public class Planet implements Observer {
                 map[y][x] = tileFactory.createTile(x, y, 10, 10, type);
             }
         }
+
+        File fileFLL = new File("src\\main\\resources\\fuzzylogic\\Metamorphosis.fll");
+
+        try {
+            this.engine = new FllImporter().fromFile(fileFLL);
+
+            System.out.println(this.engine);
+
+            StringBuilder status = new StringBuilder();
+            if (!engine.isReady(status))
+                throw new RuntimeException("[engine error] engine is not ready:n" + status);
+
+            InputVariable sampledOre = engine.getInputVariable("sampledOre");
+            InputVariable drawnedWater = engine.getInputVariable("drawnedWater");
+
+            OutputVariable metamorphosis = engine.getOutputVariable("metamorphosis");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Tile[] getRecentlyChangedTiles() {
@@ -122,34 +143,4 @@ public class Planet implements Observer {
         }
     }
 
-    public void metamorphosisLogic() {
-
-        File fileFLL = new File("../resources/fuzzylogic/Metamorphosis.fll");
-
-        try {
-
-            Engine engine = new FllImporter().fromFile(fileFLL);
-
-            StringBuilder status = new StringBuilder();
-            if (!engine.isReady(status))
-                throw new RuntimeException("[engine error] engine is not ready:n" + status);
-
-            InputVariable sampledOre = engine.getInputVariable("sampledOre");
-            InputVariable drawnedWater = engine.getInputVariable("drawnedWater");
-
-            OutputVariable metamorphosis = engine.getOutputVariable("metamorphosis");
-
-//            for (int i = 0; i <= 50; ++i){
-//                double location = obstacle.getMinimum() + i * (obstacle.range() / 50);
-//                obstacle.setValue(location);
-//                engine.process();
-//                FuzzyLite.logger().info(String.format(
-//                        "obstacle.input = %s -> steer.output = %s",
-//                        Op.str(location), Op.str(steer.getValue())));
-//            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
