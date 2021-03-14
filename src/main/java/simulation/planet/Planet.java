@@ -14,7 +14,8 @@ public class Planet implements Observer {
     private final int         SIZE_Y      = 21;
     private       TileFactory tileFactory = new TileFactory();
 
-    private final int[][] squeleton = {
+    /** The skeleton of the planet */
+    private final int[][] skeleton = {
             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1},
@@ -38,6 +39,7 @@ public class Planet implements Observer {
             {1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}
     };
 
+    /** Initial state of the map with the predefined integers */
     private final int[][] initialState = {
             {0, 0, 0, 0, 8, 10, 5, 5, 5, 5, 5, 5, 10, 8, 8, 8, 10, 8, 8, 2, 3},
             {0, 0, 8, 8, 8, 10, 5, 5, 5, 5, 8, 10, 10, 10, 8, 10, 8, 8, 6, 3, 3},
@@ -89,8 +91,8 @@ public class Planet implements Observer {
         return SIZE_Y;
     }
 
-    public int[][] getSqueleton() {
-        return squeleton;
+    public int[][] getSkeleton() {
+        return skeleton;
     }
 
     public int[][] getInitialState() {

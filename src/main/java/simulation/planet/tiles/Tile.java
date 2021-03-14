@@ -72,6 +72,12 @@ public class Tile extends ObservableTile {
         this.type = type;
     }
 
+    /**
+     * Method using the state pattern design. A Tile, when metamorphosing, can transform in certain type of tile with
+     * certain percentage. This method is choosing the next type of cell.
+     *
+     * @return The chosen tileType
+     */
     public TileType nextTile() {
         // Find a random number to find the next tile
         Random r = new Random();

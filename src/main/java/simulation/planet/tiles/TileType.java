@@ -36,6 +36,13 @@ public enum TileType {
         return nameFile;
     }
 
+    /**
+     * Find the type of the tile by a preset integer.
+     *
+     * @param nb The preset integer.
+     * @return The researched type of tile.
+     * @throws MissingTileTypeException If the number doesn't exit this exception is thrown.
+     */
     public static TileType getType(int nb) throws MissingTileTypeException {
         int min = 0;
         int max = 0;
