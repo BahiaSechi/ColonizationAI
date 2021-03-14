@@ -1,14 +1,53 @@
 package robots;
 
+import java.util.Map;
+
 public class RobotController {
-    Pos colonyCenter;
+    private Pos                 colonyCenter;
+    private OperatorRobot       operator;
+    private Map<Integer, Robot> robots;
 
     public RobotController(Pos colonyCenter) {
         this.colonyCenter = colonyCenter;
+        this.operator = new OperatorRobot(this);
+
+        int aId = 1;
+        robots.put(aId, RobotFactory.createExtractorRobot(this, aId++));
+        robots.put(aId, RobotFactory.createExtractorRobot(this, aId++));
+        robots.put(aId, RobotFactory.createPipelinerRobot(this, aId++));
+
     }
 
     public Pos getAbsolutePos(Robot robot) {
         return new Pos(colonyCenter.getX() + robot.getMovement().getCurrentPos().getX(),
                 colonyCenter.getY() + robot.getMovement().getCurrentPos().getY());
+    }
+
+    public int getTileNumber(Pos pos) {
+        return pos.getY() * 23 + pos.getX();
+    }
+
+    public Pos getColonyCenter() {
+        return colonyCenter;
+    }
+
+    public void setColonyCenter(Pos colonyCenter) {
+        this.colonyCenter = colonyCenter;
+    }
+
+    public OperatorRobot getOperator() {
+        return operator;
+    }
+
+    public void setOperator(OperatorRobot operator) {
+        this.operator = operator;
+    }
+
+    public Map<Integer, Robot> getRobots() {
+        return robots;
+    }
+
+    public void setRobots(Map<Integer, Robot> robots) {
+        this.robots = robots;
     }
 }

@@ -17,17 +17,15 @@ public abstract class MoveStrategy {
     /**
      * The actual position of the robot, relative to its base.
      */
-    private Pos currentPos;
-
+    private Pos     currentPos;
+    private Pos     lastPos;
     private boolean goingToBase = false;
-
-    private boolean onBase = false;
+    private boolean onBase      = false;
 
     public abstract List<Pos> findNewPath();
 
     public void toBase() {
-        System.out.println("Retour à la base");
-        // Find the shortest path to base
+        // TODO: Find the shortest path to base
         setGoingToBase(true);
     }
 
@@ -41,15 +39,22 @@ public abstract class MoveStrategy {
     public boolean nextMove(Robot robot) {
         Map<Pos, Double> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
         if (!surrounding.isEmpty()) {
-            Pos maxPos = surrounding.entrySet()
+            var maxPosOpt = surrounding
+                    .entrySet()
                     .stream()
-                    .max((tile1, tile2) -> tile1.getValue() >= tile2.getValue() ? 1 : -1)
-                    .get()
-                    .getKey();
+                    .max((tile1, tile2) -> {
+                        if (tile1.getValue() == tile2.getValue()) return 0;
+                        return tile1.getValue() > tile2.getValue() ? 1 : -1;
+                    });
 
-            setCurrentPos(maxPos);
+            maxPosOpt.ifPresent(value -> {
+                var maxPos = maxPosOpt.get().getKey();
+                setCurrentPos(maxPos);
+            });
         } else {
-            int rand = (new Random()).nextInt(5) + 1;
+            // TODO: Check Q-surrounding from q-tables
+
+            int rand = (new Random()).nextInt(7) + 1;
 
             switch (rand) {
                 case 1:
@@ -78,7 +83,7 @@ public abstract class MoveStrategy {
                     currentPos.setY(currentPos.getY() + 1);
                     break;
                 case 8:
-                    currentPos.setY(currentPos.getY() + 1);
+                    currentPos.setY(currentPos.getX() - 1);
                     break;
             }
         }
@@ -116,5 +121,13 @@ public abstract class MoveStrategy {
 
     public void setOnBase(boolean onBase) {
         this.onBase = onBase;
+    }
+
+    public Pos getLastPos() {
+        return lastPos;
+    }
+
+    public void setLastPos(Pos lastPos) {
+        this.lastPos = lastPos;
     }
 }

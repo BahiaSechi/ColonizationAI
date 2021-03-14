@@ -9,14 +9,16 @@ import java.util.Optional;
 
 
 public class Robot {
-    private MoveStrategy movement;
+    private int             id;
+    private MoveStrategy    movement;
     private RobotController controller;
-    private State state;
-    private double epsilon;
-    private ViewSensor viewSensor;
-    private Tool tool;
+    private State           state;
+    private double          epsilon;
+    private ViewSensor      viewSensor;
+    private Tool            tool;
 
-    public Robot(MoveStrategy movement, RobotController controller, State state, double epsilon, ViewSensor viewSensor) {
+    public Robot(int id, MoveStrategy movement, RobotController controller, State state, double epsilon, ViewSensor viewSensor) {
+        this.id = id;
         this.movement = movement;
         this.controller = controller;
         this.state = state;
