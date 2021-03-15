@@ -1,10 +1,10 @@
-package robots;
+package simulation.robots;
 
-import robots.moves.MoveToOre;
-import robots.moves.MoveToWater;
-import robots.states.Exploring;
-import sensors.lv223.OreSensor;
-import sensors.lv223.WaterSensor;
+import simulation.robots.moves.MoveToOre;
+import simulation.robots.moves.MoveToWater;
+import simulation.robots.states.Exploring;
+import simulation.sensors.lv223.OreSensor;
+import simulation.sensors.lv223.WaterSensor;
 
 public class RobotFactory {
     public static Robot createExtractorRobot(RobotController controller, int id) {

@@ -1,7 +1,7 @@
-package robots.states;
+package simulation.robots.states;
 
-import robots.Robot;
-import robots.moves.MoveStrategy;
+import simulation.robots.Robot;
+import simulation.robots.moves.MoveStrategy;
 
 import java.util.Optional;
 

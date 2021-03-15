@@ -1,6 +1,6 @@
-package sensors.lv223;
+package simulation.sensors.lv223;
 
-import planet.Tile;
+import simulation.planet.tiles.Tile;
 
 public class NoSensor extends ViewSensor {
     @Override

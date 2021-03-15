@@ -1,9 +1,9 @@
-package sensors.lv223;
+package simulation.sensors.lv223;
 
-import planet.Planet;
-import planet.Tile;
-import robots.Pos;
-import robots.Robot;
+import simulation.planet.Planet;
+import simulation.planet.tiles.Tile;
+import simulation.robots.Pos;
+import simulation.robots.Robot;
 
 import java.util.Map;
 import java.util.stream.Collectors;

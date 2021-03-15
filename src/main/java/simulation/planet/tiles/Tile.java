@@ -2,7 +2,9 @@ package simulation.planet.tiles;
 
 import simulation.planet.exploitability.Exploitability;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
 
 public class Tile extends ObservableTile {
 
@@ -89,4 +91,6 @@ public class Tile extends ObservableTile {
 
         return tileType;
     }
+
+
 }

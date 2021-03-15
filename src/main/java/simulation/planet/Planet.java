@@ -5,6 +5,9 @@ import simulation.planet.tiles.Observer;
 import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileFactory;
 import simulation.planet.tiles.TileType;
+import simulation.robots.Pos;
+
+import java.util.List;
 
 public class Planet implements Observer {
 
@@ -77,20 +80,38 @@ public class Planet implements Observer {
         return this.recentlyChangedTiles;
     }
 
-    public Tile[][] getMap() { return map; }
+    public Tile[][] getMap() {
+        return map;
+    }
 
-    public int getSIZE_X() { return SIZE_X; }
+    public int getSIZE_X() {
+        return SIZE_X;
+    }
 
-    public int getSIZE_Y() { return SIZE_Y; }
+    public int getSIZE_Y() {
+        return SIZE_Y;
+    }
 
-    public int[][] getSqueleton() { return squeleton; }
+    public int[][] getSqueleton() {
+        return squeleton;
+    }
 
-    public int[][] getInitialState() { return initialState; }
+    public int[][] getInitialState() {
+        return initialState;
+    }
+
+    public List<Tile> getSurrounding(Pos absolutePos) {
+        return List.of(null);
+    }
+
+    public Tile getTile(int x, int y) {
+        return map[x][y];
+    }
 
     public void update() {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
-                map[y][x] = tileFactory.createTile(x,y,10, 10, map[y][x].nextTile());
+                map[y][x] = tileFactory.createTile(x, y, 10, 10, map[y][x].nextTile());
             }
         }
     }

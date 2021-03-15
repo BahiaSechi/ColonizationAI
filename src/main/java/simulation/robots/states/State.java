@@ -1,6 +1,6 @@
-package robots.states;
+package simulation.robots.states;
 
-import robots.Robot;
+import simulation.robots.Robot;
 
 import java.util.Optional;
 

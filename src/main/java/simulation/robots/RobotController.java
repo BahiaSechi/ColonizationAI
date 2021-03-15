@@ -1,4 +1,4 @@
-package robots;
+package simulation.robots;
 
 import java.util.Map;
 
@@ -9,13 +9,27 @@ public class RobotController {
 
     public RobotController(Pos colonyCenter) {
         this.colonyCenter = colonyCenter;
-        this.operator = new OperatorRobot(this);
+        this.operator = new OperatorRobot(this, 0);
 
         int aId = 1;
         robots.put(aId, RobotFactory.createExtractorRobot(this, aId++));
         robots.put(aId, RobotFactory.createExtractorRobot(this, aId++));
         robots.put(aId, RobotFactory.createPipelinerRobot(this, aId++));
 
+    }
+
+    public boolean addRobot(int id, Robot robot) {
+        if (robots.containsKey(id)) return false;
+
+        robots.put(id, robot);
+        return true;
+    }
+
+    public boolean removeRobot(int id, Robot robot) {
+        if (!robots.containsKey(id)) return false;
+
+        robots.remove(id);
+        return true;
     }
 
     public Pos getAbsolutePos(Robot robot) {

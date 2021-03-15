@@ -1,7 +1,8 @@
-package sensors.lv223;
+package simulation.sensors.lv223;
 
-import planet.Tile;
-import planet.TileType;
+
+import simulation.planet.tiles.Tile;
+import simulation.planet.tiles.TileType;
 
 public class WaterSensor extends ViewSensor {
     @Override
