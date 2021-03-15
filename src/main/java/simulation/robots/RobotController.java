@@ -10,12 +10,6 @@ public class RobotController {
     public RobotController(Pos colonyCenter) {
         this.colonyCenter = colonyCenter;
         this.operator = new OperatorRobot(this, 0);
-
-        int aId = 1;
-        robots.put(aId, RobotFactory.createExtractorRobot(this, aId++));
-        robots.put(aId, RobotFactory.createExtractorRobot(this, aId++));
-        robots.put(aId, RobotFactory.createPipelinerRobot(this, aId++));
-
     }
 
     public boolean addRobot(int id, Robot robot) {

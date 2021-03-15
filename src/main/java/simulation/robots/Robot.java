@@ -24,6 +24,8 @@ public class Robot {
         this.state = state;
         this.epsilon = epsilon;
         this.viewSensor = viewSensor;
+
+        System.out.println("Salut, je suis un robot gentil");
     }
 
     public void nextMove() {
