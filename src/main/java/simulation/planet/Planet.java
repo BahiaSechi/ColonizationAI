@@ -86,7 +86,7 @@ public class Planet implements Observer {
         try {
             this.engine = new FllImporter().fromFile(fileFLL);
 
-            System.out.println(this.engine);
+            //System.out.println(this.engine);
 
             StringBuilder status = new StringBuilder();
             if (!engine.isReady(status))
