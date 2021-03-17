@@ -1,6 +1,7 @@
 package simulation.planet;
 
 import com.fuzzylite.Engine;
+import com.fuzzylite.FuzzyLite;
 import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
@@ -127,6 +128,17 @@ public class Planet implements Observer {
     }
 
     public void update() {
+        //recuperation of the different inputs variables
+        InputVariable obstacle = engine.getInputVariable("obstacle");
+        InputVariable obstacle = engine.getInputVariable("obstacle");
+
+        double location = obstacle.getMinimum() + i * (obstacle.range() / 50);
+        obstacle.setValue(location);
+        engine.process();
+        FuzzyLite.logger().info(String.format(
+                "obstacle.input = %s -> steer.output = %s",
+                Op.str(location), Op.str(steer.getValue())));
+
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 map[y][x] = tileFactory.createTile(x, y, 10, 10, map[y][x].nextTile());
