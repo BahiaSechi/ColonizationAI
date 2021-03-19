@@ -16,6 +16,12 @@ public class Game {
         } catch (MissingTileTypeException e) {
             e.printStackTrace();
         }
+
+        /*
+        for (int i=0 ; i<20 ; i++) {
+            planet.getMap()
+        }
+        */
     }
 
     public Planet getPlanet() {

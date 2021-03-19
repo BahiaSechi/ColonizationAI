@@ -13,15 +13,16 @@ import simulation.planet.tiles.TileType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class Planet implements Observer {
 
-    private       Tile[][]    map;
-    private       Tile[]      recentlyChangedTiles;
-    private final int         SIZE_X      = 21;
+    private       Tile[][]   map;
+    private       List<Tile> recentlyChangedTiles;
+    private final int        SIZE_X      = 21;
     private final int         SIZE_Y      = 21;
     private       TileFactory tileFactory = new TileFactory();
-    private Engine engine = null;
+    private       Engine      engine = null;
 
     /** The skeleton of the planet */
     private final int[][] skeleton = {
@@ -103,8 +104,8 @@ public class Planet implements Observer {
         }
     }
 
-    public Tile[] getRecentlyChangedTiles() {
-        return this.recentlyChangedTiles;
+    public List<Tile> getRecentlyChangedTiles() {
+        return recentlyChangedTiles;
     }
 
     public Tile[][] getMap() {
@@ -128,22 +129,30 @@ public class Planet implements Observer {
     }
 
     public void update() {
-        //recuperation of the different inputs variables
-        InputVariable obstacle = engine.getInputVariable("obstacle");
-        InputVariable obstacle = engine.getInputVariable("obstacle");
+        //recuperation of the different engine variables
+        InputVariable oreIn = engine.getInputVariable("sampledOre");
+        InputVariable waterIn = engine.getInputVariable("drawnedWater");
+        OutputVariable meta = engine.getOutputVariable("metamorphosis");
 
-        double location = obstacle.getMinimum() + i * (obstacle.range() / 50);
-        obstacle.setValue(location);
-        engine.process();
-        FuzzyLite.logger().info(String.format(
-                "obstacle.input = %s -> steer.output = %s",
-                Op.str(location), Op.str(steer.getValue())));
+        double drawnedWater = 0.0f;
+        double sampledOre = 0.0f;
 
-        for (int y = 0; y < SIZE_Y; y++) {
-            for (int x = 0; x < SIZE_X; x++) {
-                map[y][x] = tileFactory.createTile(x, y, 10, 10, map[y][x].nextTile());
+        for (Tile tmp : this.recentlyChangedTiles) {
+            double extractedResources = tmp.getExploitability().getMax() - tmp.getExploitability().getCurrent();
+            if (tmp.getType() ==TileType.ORE) {
+                sampledOre += extractedResources;
+            } else if (tmp.getType() == TileType.WATER) {
+                drawnedWater += extractedResources;
             }
+            //this.recentlyChangedTiles.remove(tmp);
         }
+
+        oreIn.setValue(sampledOre);
+        waterIn.setValue(drawnedWater);
+        engine.process();
+        System.out.println("AAAAAAAAAAAAAA => " + sampledOre + " ## " + drawnedWater + " -> " + meta.getValue());
+
+
     }
 
     private void afficheDebug() {
@@ -155,4 +164,14 @@ public class Planet implements Observer {
         }
     }
 
+    public void consumeRessourcesOnRandomCase(TileType type, int amount) {
+        for (int y = 0; y < SIZE_Y; y++) {
+            for (int x = 0; x < SIZE_X; x++) {
+                if (map[y][x].getType() == type) {
+                    map[y][x].exploit(amount);
+                }
+            }
+            System.out.println();
+        }
+    }
 }

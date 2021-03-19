@@ -26,8 +26,23 @@ public class Tile extends ObservableTile {
         // percentages.
     }
 
-    // TODO Implement exploit
-    public void exploit() {
+    //
+    /**
+     * Extract the specified resources.
+     *
+     * TODO Implement BETTER exploit
+     *
+     * @param amount The amount of resources to extract.
+     * @return The amount left to extract if there not enough left of resources.
+     */
+    public int exploit(int amount) {
+        if (this.exploitability.getMax() != 0) {
+            int oldCurrent = this.exploitability.getCurrent();
+            int newCurrent = oldCurrent - amount;
+            this.exploitability.setCurrent(Math.max(newCurrent, 0));
+            return oldCurrent<amount ? amount-oldCurrent : 0;
+        }
+        return amount;
     }
 
     // Getters & Setters
@@ -70,6 +85,10 @@ public class Tile extends ObservableTile {
 
     public void setType(TileType type) {
         this.type = type;
+    }
+
+    public Exploitability getExploitability() {
+        return exploitability;
     }
 
     /**
