@@ -19,8 +19,8 @@ public class Game {
         }
 
         for (int i=0 ; i<20 ; i++) {
-            planet.consumeResourcesOnRandomCase(TileType.WATER, 1000);
-            planet.consumeResourcesOnRandomCase(TileType.ORE, 10);
+            planet.consumeResourcesOnRandomCase(TileType.WATER, 500);
+            planet.consumeResourcesOnRandomCase(TileType.ORE, 5);
             planet.update();
         }
 

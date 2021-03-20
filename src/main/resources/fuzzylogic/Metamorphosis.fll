@@ -13,7 +13,7 @@ InputVariable: drawnedWater
   term: insignificant Trapezoid 0 0 8 14
   term: small Trapezoid 8 14 36 44
   term: medium Trapezoid 36 44 66 72
-  term: large Trapezoid 66 72 100 500
+  term: large Trapezoid 66 72 100 1000
 OutputVariable: metamorphosis
   enabled: true
   range: 0 100

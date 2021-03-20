@@ -151,9 +151,9 @@ public class Planet implements Observer {
         }
 
         oreIn.setValue(sampledOre);
-        waterIn.setValue(drawnedWater);
+        waterIn.setValue(drawnedWater/1000);
         engine.process();
-        //System.out.println("AAAAAAAAAAAAAA => " + Op.str(sampledOre) + " ## " + Op.str(drawnedWater) + " -> " + Op.str(meta.));
+        System.out.println("AAAAAAAAAAAAAA => " + Op.str(sampledOre) + " ## " + Op.str(drawnedWater) + " -> " + engine.getOutputValue("metamorphosis"));
 
         FuzzyLite.logger().info(String.format(
                 "obstacle.input = %s -> steer.output = %s",
