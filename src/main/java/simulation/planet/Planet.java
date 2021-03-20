@@ -157,6 +157,7 @@ public class Planet implements Observer {
         analyseFuzzyLogicOutPut(meta.getValue());
 
         this.recentlyChangedTiles.clear();
+
     }
 
     private void analyseFuzzyLogicOutPut(double metamorphosisPourcentage) {
