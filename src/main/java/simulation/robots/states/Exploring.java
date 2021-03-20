@@ -3,6 +3,7 @@ package simulation.robots.states;
 import javafx.util.Pair;
 import simulation.robots.Pos;
 import simulation.robots.Robot;
+import simulation.robots.moves.Action;
 import simulation.robots.moves.MoveStrategy;
 import simulation.sensors.lv223.ViewSensor;
 
@@ -22,18 +23,18 @@ public class Exploring extends State {
     public Pair<Integer, Optional<State>> nextMove(Robot robot) {
         MoveStrategy strat = robot.getMovement();
         float choice = (new Random()).nextFloat();
-        Pos newPos;
+        Pair<Pos, Action> pair;
 
         if (choice >= robot.getEpsilon()) {
-            newPos = strat.randomMove(robot);
+            pair = strat.randomMove(robot);
         } else {
-            newPos = strat.bestMove(robot);
+            pair = strat.bestMove(robot);
         }
 
         ViewSensor sensor = robot.getViewSensor();
         int quality;
-        if (!sensor.isAnObstacle(newPos)) {
-            this.setPos(newPos);
+        if (!sensor.isAnObstacle(pair.getKey())) {
+            this.setPos(pair.getKey());
             quality = sensor.ratePos(robot);
         } else {
             quality = -10;

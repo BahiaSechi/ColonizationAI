@@ -3,8 +3,12 @@ package simulation.robots.states;
 import javafx.util.Pair;
 import simulation.robots.Pos;
 import simulation.robots.Robot;
+import simulation.robots.moves.Action;
+import simulation.robots.moves.MoveStrategy;
+import simulation.sensors.lv223.ViewSensor;
 
 import java.util.Optional;
+import java.util.Random;
 
 public class UsingTool extends State {
     public UsingTool(Pos pos) {
@@ -17,11 +21,27 @@ public class UsingTool extends State {
 
     @Override
     public Pair<Integer, Optional<State>> nextMove(Robot robot) {
-        if (robot.getViewSensor().isCurrentExploitable(robot) > 0.0) {
-            robot.getTool().use(robot);
+        MoveStrategy strat = robot.getMovement();
+        float choice = (new Random()).nextFloat();
+        Pair<Pos, Action> pair;
+
+        if (choice >= robot.getEpsilon()) {
+            pair = strat.randomMove(robot);
+        } else {
+            pair = strat.bestMove(robot);
         }
 
-        return Optional.empty();
+        ViewSensor sensor = robot.getViewSensor();
+        int quality;
+        if (!sensor.isAnObstacle(pair.getKey())) {
+            this.setPos(pair.getKey());
+            quality = sensor.ratePos(robot);
+        } else {
+            quality = -10;
+        }
+
+        if (sensor.isCurrentExploitable(robot) > 0.0) return new Pair<>(quality, Optional.of(nextState()));
+        else return new Pair<>(quality, Optional.empty());
     }
 
     @Override

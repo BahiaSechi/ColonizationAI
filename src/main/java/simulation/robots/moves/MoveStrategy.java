@@ -1,6 +1,8 @@
 package simulation.robots.moves;
 
 import javafx.util.Pair;
+import lombok.Getter;
+import lombok.Setter;
 import simulation.robots.Pos;
 import simulation.robots.Robot;
 
@@ -12,17 +14,25 @@ public abstract class MoveStrategy {
     /**
      * currentPath holds a path that the robot must follow. It is optional. It can be a path leading to the base.
      */
+    @Getter
+    @Setter
     private List<Pos> currentPath;
 
     /**
      * The actual position of the robot, relative to its base.
      */
+    @Getter
+    @Setter
     private Pos     currentPos;
+    @Getter
+    @Setter
     private Pos     lastPos;
+    @Getter
+    @Setter
     private boolean goingToBase = false;
+    @Getter
+    @Setter
     private boolean onBase      = false;
-
-    public abstract List<Pos> findNewPath();
 
     public void toBase() {
         // TODO: Find the shortest path to base
@@ -35,7 +45,7 @@ public abstract class MoveStrategy {
      * @param robot The robot to move
      * @return The new pos
      */
-    public abstract Pos bestMove(Robot robot);
+    public abstract Pair<Pos, Action> bestMove(Robot robot);
 
 
 //    Map<Pos, Double> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
@@ -90,45 +100,5 @@ public abstract class MoveStrategy {
         }
 
         return new Pair<>(newPos, action);
-    }
-
-    public Pos getCurrentPos() {
-        return currentPos;
-    }
-
-    public void setCurrentPos(Pos currentPos) {
-        this.currentPos = currentPos;
-    }
-
-    public List<Pos> getCurrentPath() {
-        return currentPath;
-    }
-
-    public void setCurrentPath(List<Pos> currentPath) {
-        this.currentPath = currentPath;
-    }
-
-    public boolean isGoingToBase() {
-        return goingToBase;
-    }
-
-    public void setGoingToBase(boolean goingToBase) {
-        this.goingToBase = goingToBase;
-    }
-
-    public boolean isOnBase() {
-        return onBase;
-    }
-
-    public void setOnBase(boolean onBase) {
-        this.onBase = onBase;
-    }
-
-    public Pos getLastPos() {
-        return lastPos;
-    }
-
-    public void setLastPos(Pos lastPos) {
-        this.lastPos = lastPos;
     }
 }

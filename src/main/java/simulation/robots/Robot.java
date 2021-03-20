@@ -48,7 +48,7 @@ public class Robot {
 
     /**
      * Represents a game iteration for the robot
-     * <p>
+     *
      * The order is :
      * - check life
      * - decide between Exploit. and Explor.
