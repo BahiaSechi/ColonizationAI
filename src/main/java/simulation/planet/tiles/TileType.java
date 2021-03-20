@@ -17,7 +17,6 @@ public enum TileType {
     MEADOW_NORMAL(9, "/sprites/world/MEADOW_NORMAL.png"),
     MEADOW_GREASY(10, "/sprites/world/MEADOW_GREASY.png");
 
-
     private final int                 number;
     private final String              nameFile;
     private       List<Metamorphosis> metamorphoses;
