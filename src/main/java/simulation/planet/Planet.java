@@ -6,6 +6,7 @@ import com.fuzzylite.Op;
 import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
+import lombok.Data;
 import simulation.planet.exception.MissingTileTypeException;
 import simulation.planet.tiles.Observer;
 import simulation.planet.tiles.Tile;
@@ -15,10 +16,10 @@ import simulation.robots.Pos;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+@Data
 public class Planet implements Observer {
 
     private       Tile[][]   map;
@@ -94,8 +95,6 @@ public class Planet implements Observer {
         try {
             this.engine = new FllImporter().fromFile(fileFLL);
 
-            //System.out.println(this.engine);
-
             StringBuilder status = new StringBuilder();
             if (!engine.isReady(status))
                 throw new RuntimeException("[engine error] engine is not ready:n" + status);
@@ -108,30 +107,6 @@ public class Planet implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<Tile> getRecentlyChangedTiles() {
-        return recentlyChangedTiles;
-    }
-
-    public Tile[][] getMap() {
-        return map;
-    }
-
-    public int getSIZE_X() {
-        return SIZE_X;
-    }
-
-    public int getSIZE_Y() {
-        return SIZE_Y;
-    }
-
-    public int[][] getSkeleton() {
-        return skeleton;
-    }
-
-    public int[][] getInitialState() {
-        return initialState;
     }
 
     public void update() {
