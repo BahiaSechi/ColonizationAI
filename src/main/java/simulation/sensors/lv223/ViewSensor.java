@@ -27,7 +27,7 @@ public abstract class ViewSensor {
     public Map<Pos, Double> exploitableSurrounding(Robot robot) {
         Pos absolutePos = robot.getController().getAbsolutePos(robot);
 
-        return planet.getSurrounding(absolutePos)
+        return planet.getSurrounding(absolutePos, 1)
                 .stream()
                 .collect(Collectors.toMap(tile -> new Pos(tile.getTileX(), tile.getTileY()), this::isExploitable));
     }
