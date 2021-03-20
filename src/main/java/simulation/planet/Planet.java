@@ -173,6 +173,7 @@ public class Planet implements Observer {
     }
 
     public void consumeResourcesOnRandomCase(TileType type, int amount) {
+        //ebfhiefbhefbhjiefbhjif
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 if (map[y][x].getType() == type) {
