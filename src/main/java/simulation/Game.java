@@ -2,6 +2,7 @@ package simulation;
 
 import simulation.planet.Planet;
 import simulation.planet.exception.MissingTileTypeException;
+import simulation.planet.tiles.TileType;
 
 public class Game {
 
@@ -17,11 +18,12 @@ public class Game {
             e.printStackTrace();
         }
 
-        /*
         for (int i=0 ; i<20 ; i++) {
-            planet.getMap()
+            planet.consumeResourcesOnRandomCase(TileType.WATER, 1000);
+            planet.consumeResourcesOnRandomCase(TileType.ORE, 10);
+            planet.update();
         }
-        */
+
     }
 
     public Planet getPlanet() {

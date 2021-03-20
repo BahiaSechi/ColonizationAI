@@ -27,21 +27,21 @@ OutputVariable: metamorphosis
   term: medium Trapezoid 10 15 50 60
   term: large Trapezoid 50 60 75 85
   term: important Trapezoid 75 85 100 100
-RuleBlock: metaRules
+RuleBlock: mamdani
   enabled: true
   conjunction: AlgebraicProduct
   disjunction: none
   implication: AlgebraicProduct
   activation: General
   rule: if sampledOre is small and drawnedWater is insignificant then metamorphosis is limited
-    rule: if sampledOre is small and drawnedWater is small then metamorphosis is small
-    rule: if sampledOre is small and drawnedWater is medium then metamorphosis is small
-    rule: if sampledOre is small and drawnedWater is large then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is insignificant then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is small then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is medium then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is large then metamorphosis is medium
-    rule: if sampledOre is large and drawnedWater is insignificant then metamorphosis is large
-    rule: if sampledOre is large and drawnedWater is small then metamorphosis is large
-    rule: if sampledOre is large and drawnedWater is medium then metamorphosis is important
-    rule: if sampledOre is large and drawnedWater is large then metamorphosis is important
+  rule: if sampledOre is small and drawnedWater is small then metamorphosis is small
+  rule: if sampledOre is small and drawnedWater is medium then metamorphosis is small
+  rule: if sampledOre is small and drawnedWater is large then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is insignificant then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is small then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is medium then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is large then metamorphosis is medium
+  rule: if sampledOre is large and drawnedWater is insignificant then metamorphosis is large
+  rule: if sampledOre is large and drawnedWater is small then metamorphosis is large
+  rule: if sampledOre is large and drawnedWater is medium then metamorphosis is important
+  rule: if sampledOre is large and drawnedWater is large then metamorphosis is important

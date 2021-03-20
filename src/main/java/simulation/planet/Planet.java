@@ -2,6 +2,7 @@ package simulation.planet;
 
 import com.fuzzylite.Engine;
 import com.fuzzylite.FuzzyLite;
+import com.fuzzylite.Op;
 import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
@@ -13,6 +14,7 @@ import simulation.planet.tiles.TileType;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Planet implements Observer {
@@ -83,6 +85,8 @@ public class Planet implements Observer {
             }
         }
 
+        this.recentlyChangedTiles = new LinkedList<>();
+
         File fileFLL = new File("src\\main\\resources\\fuzzylogic\\Metamorphosis.fll");
 
         try {
@@ -139,20 +143,24 @@ public class Planet implements Observer {
 
         for (Tile tmp : this.recentlyChangedTiles) {
             double extractedResources = tmp.getExploitability().getMax() - tmp.getExploitability().getCurrent();
-            if (tmp.getType() ==TileType.ORE) {
+            if (tmp.getType() == TileType.ORE) {
                 sampledOre += extractedResources;
             } else if (tmp.getType() == TileType.WATER) {
                 drawnedWater += extractedResources;
             }
-            //this.recentlyChangedTiles.remove(tmp);
         }
 
         oreIn.setValue(sampledOre);
         waterIn.setValue(drawnedWater);
         engine.process();
-        System.out.println("AAAAAAAAAAAAAA => " + sampledOre + " ## " + drawnedWater + " -> " + meta.getValue());
+        //System.out.println("AAAAAAAAAAAAAA => " + Op.str(sampledOre) + " ## " + Op.str(drawnedWater) + " -> " + Op.str(meta.));
+
+        FuzzyLite.logger().info(String.format(
+                "obstacle.input = %s -> steer.output = %s",
+                Op.str(drawnedWater), Op.str(meta.getValue())));
 
 
+        this.recentlyChangedTiles.clear();
     }
 
     private void afficheDebug() {
@@ -164,14 +172,15 @@ public class Planet implements Observer {
         }
     }
 
-    public void consumeRessourcesOnRandomCase(TileType type, int amount) {
+    public void consumeResourcesOnRandomCase(TileType type, int amount) {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 if (map[y][x].getType() == type) {
-                    map[y][x].exploit(amount);
+                    amount = map[y][x].exploit(amount);
+                    this.recentlyChangedTiles.add(map[y][x]);
+                    if (amount == 0) return;
                 }
             }
-            System.out.println();
         }
     }
 }
