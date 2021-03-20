@@ -1,5 +1,6 @@
 package simulation.robots;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class RobotController {
@@ -10,6 +11,7 @@ public class RobotController {
     public RobotController(Pos colonyCenter) {
         this.colonyCenter = colonyCenter;
         this.operator = new OperatorRobot(this, 0);
+        this.robots = new HashMap<Integer, Robot>();
     }
 
     public boolean addRobot(int id, Robot robot) {

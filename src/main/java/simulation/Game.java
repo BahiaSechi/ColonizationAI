@@ -22,9 +22,9 @@ public class Game {
 
         RobotController controller = new RobotController(new Pos(12, 12));
         int aId = 1;
-        controller.addRobot(aId, RobotFactory.createExtractorRobot(controller, aId++));
-        controller.addRobot(aId, RobotFactory.createExtractorRobot(controller, aId++));
-        controller.addRobot(aId, RobotFactory.createPipelinerRobot(controller, aId++));
+        controller.addRobot(aId, RobotFactory.createExtractorRobot(controller, aId++, new Pos(0, 0)));
+        controller.addRobot(aId, RobotFactory.createExtractorRobot(controller, aId++, new Pos(0, 0)));
+        controller.addRobot(aId, RobotFactory.createPipelinerRobot(controller, aId++, new Pos(0, 0)));
     }
 
     public Planet getPlanet() { return planet; }

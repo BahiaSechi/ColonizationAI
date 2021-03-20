@@ -1,10 +1,10 @@
 package simulation.robots.moves;
 
+import javafx.util.Pair;
 import simulation.robots.Pos;
 import simulation.robots.Robot;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public abstract class MoveStrategy {
@@ -30,65 +30,66 @@ public abstract class MoveStrategy {
     }
 
     /**
-     * Generic method that simply checks for exploitable tile around robot and eventually go on them. If there are
-     * not any, choose a random location.
+     * Choose the best move possible according to the Q-table in OperatorRobot.
      *
      * @param robot The robot to move
-     * @return Does the robot has a path to follow ?
+     * @return The new pos
      */
-    public boolean nextMove(Robot robot) {
-        Map<Pos, Double> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
-        if (!surrounding.isEmpty()) {
-            var maxPosOpt = surrounding
-                    .entrySet()
-                    .stream()
-                    .max((tile1, tile2) -> {
-                        if (tile1.getValue() == tile2.getValue()) return 0;
-                        return tile1.getValue() > tile2.getValue() ? 1 : -1;
-                    });
+    public abstract Pos bestMove(Robot robot);
 
-            maxPosOpt.ifPresent(value -> {
-                var maxPos = maxPosOpt.get().getKey();
-                setCurrentPos(maxPos);
-            });
-        } else {
-            // TODO: Check Q-surrounding from q-tables
 
-            int rand = (new Random()).nextInt(7) + 1;
+//    Map<Pos, Double> surrounding = robot.getViewSensor().exploitableSurrounding(robot);
+//        if (!surrounding.isEmpty()) {
+//            var maxPosOpt = surrounding
+//                    .entrySet()
+//                    .stream()
+//                    .max((tile1, tile2) -> {
+//                        if (tile1.getValue() == tile2.getValue()) return 0;
+//                        return tile1.getValue() > tile2.getValue() ? 1 : -1;
+//                    });
+//
+//            maxPosOpt.ifPresent(value -> {
+//                var maxPos = maxPosOpt.get().getKey();
+//                setCurrentPos(maxPos);
+//            });
+//        }
 
-            switch (rand) {
-                case 1:
-                    currentPos.setX(currentPos.getX() - 1);
-                    currentPos.setY(currentPos.getY() - 1);
-                    break;
-                case 2:
-                    currentPos.setY(currentPos.getY() - 1);
-                    break;
-                case 3:
-                    currentPos.setX(currentPos.getX() + 1);
-                    currentPos.setY(currentPos.getY() - 1);
-                    break;
-                case 4:
-                    currentPos.setX(currentPos.getX() + 1);
-                    break;
-                case 5:
-                    currentPos.setX(currentPos.getX() + 1);
-                    currentPos.setY(currentPos.getY() + 1);
-                    break;
-                case 6:
-                    currentPos.setY(currentPos.getY() + 1);
-                    break;
-                case 7:
-                    currentPos.setX(currentPos.getX() - 1);
-                    currentPos.setY(currentPos.getY() + 1);
-                    break;
-                case 8:
-                    currentPos.setY(currentPos.getX() - 1);
-                    break;
-            }
+    /**
+     * Choose a random location to go next. Does not update robot pos directly !
+     *
+     * @param robot The robot to move
+     * @return The new pos
+     */
+    public Pair<Pos, Action> randomMove(Robot robot) {
+        int rand = (new Random()).nextInt(4);
+        Pos newPos;
+        Action action;
+        Pos currentPos = robot.getState().getPos();
+
+
+        switch (rand) {
+            case 0:
+                newPos = new Pos(currentPos.getX(), currentPos.getY() + 1);
+                action = Action.MOVE_UP;
+                break;
+            case 1:
+                newPos = new Pos(currentPos.getX(), currentPos.getY() - 1);
+                action = Action.MOVE_DOWN;
+                break;
+            case 2:
+                newPos = new Pos(currentPos.getX() - 1, currentPos.getY());
+                action = Action.MOVE_LEFT;
+                break;
+            case 3:
+                newPos = new Pos(currentPos.getX() + 1, currentPos.getY());
+                action = Action.MOVE_RIGHT;
+                break;
+            default:
+                newPos = currentPos;
+                action = null;
         }
 
-        return currentPath.isEmpty();
+        return new Pair<>(newPos, action);
     }
 
     public Pos getCurrentPos() {

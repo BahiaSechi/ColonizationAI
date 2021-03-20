@@ -1,7 +1,11 @@
 package simulation.robots;
 
+import javafx.util.Pair;
+import lombok.Getter;
+import lombok.Setter;
 import simulation.robots.moves.MoveStrategy;
 import simulation.robots.states.State;
+import simulation.robots.states.ToBase;
 import simulation.robots.tools.Tool;
 import simulation.sensors.lv223.ViewSensor;
 
@@ -10,74 +14,59 @@ import java.util.Optional;
 
 public class Robot {
     private int             id;
-    private MoveStrategy    movement;
+    @Getter
+    @Setter
     private RobotController controller;
-    private State           state;
-    private double          epsilon;
-    private ViewSensor      viewSensor;
-    private Tool            tool;
+    @Getter
+    @Setter
+    private float           health;
 
-    public Robot(int id, MoveStrategy movement, RobotController controller, State state, double epsilon, ViewSensor viewSensor) {
+    @Getter
+    @Setter
+    private MoveStrategy movement;
+    @Getter
+    @Setter
+    private float        epsilon;
+    @Getter
+    @Setter
+    private State        state;
+    @Getter
+    @Setter
+    private ViewSensor   viewSensor;
+    @Getter
+    @Setter
+    private Tool         tool;
+
+    public Robot(int id, MoveStrategy movement, RobotController controller, State state, float epsilon, ViewSensor viewSensor) {
         this.id = id;
         this.movement = movement;
         this.controller = controller;
         this.state = state;
         this.epsilon = epsilon;
         this.viewSensor = viewSensor;
-
-        System.out.println("Salut, je suis un robot gentil");
     }
 
+    /**
+     * Represents a game iteration for the robot
+     * <p>
+     * The order is :
+     * - check life
+     * - decide between Exploit. and Explor.
+     * - report the quality of the move
+     */
     public void nextMove() {
-        Optional<State> newState = state.nextMove(this);
-        newState.ifPresent(value -> state = value);
+        if (this.isInDanger()) {
+            this.state = new ToBase(this.state);
+        }
+
+        Pair<Integer, Optional<State>> result = this.state.nextMove(this);
+        result.getValue().ifPresent(value -> state = value);
+
+        // Q reporting
+//        controller.getOperator()
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
-    public RobotController getController() {
-        return controller;
-    }
-
-    public void setController(RobotController controller) {
-        this.controller = controller;
-    }
-
-    public MoveStrategy getMovement() {
-        return movement;
-    }
-
-    public void setMovement(MoveStrategy movement) {
-        this.movement = movement;
-    }
-
-    public double getEpsilon() {
-        return epsilon;
-    }
-
-    public void setEpsilon(double epsilon) {
-        this.epsilon = epsilon;
-    }
-
-    public ViewSensor getViewSensor() {
-        return viewSensor;
-    }
-
-    public void setViewSensor(ViewSensor viewSensor) {
-        this.viewSensor = viewSensor;
-    }
-
-    public Tool getTool() {
-        return tool;
-    }
-
-    public void setTool(Tool tool) {
-        this.tool = tool;
+    public boolean isInDanger() {
+        return health > 0.50;
     }
 }

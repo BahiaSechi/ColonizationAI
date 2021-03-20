@@ -1,13 +1,23 @@
 package simulation.robots.states;
 
+import javafx.util.Pair;
+import simulation.robots.Pos;
 import simulation.robots.Robot;
 import simulation.robots.moves.MoveStrategy;
 
 import java.util.Optional;
 
 public class ToBase extends State {
+    public ToBase(Pos pos) {
+        super(pos);
+    }
+
+    public ToBase(State state) {
+        super(state);
+    }
+
     @Override
-    public Optional<State> nextMove(Robot robot) {
+    public Pair<Integer, Optional<State>> nextMove(Robot robot) {
         MoveStrategy move = robot.getMovement();
         if (!move.isGoingToBase()) {
             move.toBase();
@@ -18,6 +28,6 @@ public class ToBase extends State {
 
     @Override
     public State nextState() {
-        return new Exploring();
+        return new Exploring(this.getPos());
     }
 }
