@@ -11,9 +11,11 @@ import simulation.planet.tiles.Observer;
 import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileFactory;
 import simulation.planet.tiles.TileType;
+import simulation.robots.Pos;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -173,7 +175,6 @@ public class Planet implements Observer {
     }
 
     public void consumeResourcesOnRandomCase(TileType type, int amount) {
-        //ebfhiefbhefbhjiefbhjif
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 if (map[y][x].getType() == type) {
@@ -183,5 +184,13 @@ public class Planet implements Observer {
                 }
             }
         }
+    }
+
+    public List<Tile> getSurrounding(Pos absolutePos) {
+        return List.of(null);
+    }
+
+    public Tile getTile(int x, int y) {
+        return this.map[y][x];
     }
 }
