@@ -161,11 +161,28 @@ public class Planet implements Observer {
         }
     }
 
-    public List<Tile> getSurrounding(Pos absolutePos) {
-        return List.of(null);
-    }
-
     public Tile getTile(int x, int y) {
         return this.map[y][x];
+    }
+
+    public List<Tile> getSurrounding(Pos position, int degree) {
+        return getSurrounding(map[position.getY()][position.getX()], degree);
+    }
+
+    public List<Tile> getSurrounding(Tile tile, int degree) {
+        List<Tile> tilesAround = new LinkedList<>();
+
+        for (int y = -degree ; y <= degree ; y++) {
+            for (int x = -degree ; x <= degree; x++) {
+
+                int newY = tile.getTileY()+y;
+                int newX = tile.getTileX()+x;
+
+                if (newY >= 0 && newX >= 0 && newX <= this.SIZE_X && newY <= this.SIZE_Y) {
+                    tilesAround.add(map[newY][newX]);
+                }
+            }
+        }
+        return tilesAround;
     }
 }
