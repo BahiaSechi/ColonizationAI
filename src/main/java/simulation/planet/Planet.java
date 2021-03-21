@@ -8,10 +8,7 @@ import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
 import lombok.Data;
 import simulation.planet.exception.MissingTileTypeException;
-import simulation.planet.tiles.Observer;
-import simulation.planet.tiles.Tile;
-import simulation.planet.tiles.TileFactory;
-import simulation.planet.tiles.TileType;
+import simulation.planet.tiles.*;
 import simulation.robots.Pos;
 
 import java.io.File;
@@ -25,7 +22,9 @@ public class Planet implements Observer {
     private       Tile[][]   map;
     private       List<Tile> recentlyChangedTiles;
     private final int        SIZE_X      = 21;
-    private final int         SIZE_Y      = 21;
+    private final int SIZE_Y   = 21;
+    private final int         WIDTH       = 10;
+    private final int         HEIGHT      = 10;
     private       TileFactory tileFactory = new TileFactory();
     private       Engine      engine = null;
 
@@ -84,7 +83,7 @@ public class Planet implements Observer {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 TileType type = TileType.getType(initialState[y][x]);
-                map[y][x] = tileFactory.createTile(x, y, 10, 10, type);
+                map[y][x] = tileFactory.createTile(x, y, WIDTH, HEIGHT, type);
             }
         }
 
@@ -134,24 +133,27 @@ public class Planet implements Observer {
         FuzzyLite.logger().info(String.format(
                 "obstacle.input = %s -> steer.output = %s",
                 Op.str(drawnedWater), Op.str(meta.getValue())));
-        //meta.fuzzyOutputValue()
+
         analyseFuzzyLogicOutPut(meta.getValue());
-
-
-        System.out.println("My Tile" + this.recentlyChangedTiles.get(0));
-        for (Tile temp: this.getSurrounding(this.recentlyChangedTiles.get(0), 2)) {
-            System.out.println("Surroudings" + temp);
-        }
 
         this.recentlyChangedTiles.clear();
 
     }
 
     private void analyseFuzzyLogicOutPut(double metamorphosisPourcentage) {
-        //switch (metamorphosisPourcentage)
+        MetamorphosisType engineOutput = MetamorphosisType.getMetamorphosisType(metamorphosisPourcentage);
+        List<Tile> toModify = new LinkedList<>();
 
         for (Tile temp: this.recentlyChangedTiles) {
-            System.out.println("Surroudings" + temp);
+            for (Tile tile : this.getSurrounding(temp, engineOutput.metamorphosisArea)) {
+                if (!toModify.contains(tile)) {
+                    toModify.add(tile);
+                }
+            }
+        }
+
+        for (Tile tile : toModify) {
+            map[tile.getTileY()][tile.getTileX()] = this.tileFactory.createTile(tile.getTileX(), tile.getTileY(), WIDTH, HEIGHT, tile.nextTile());
         }
     }
 
