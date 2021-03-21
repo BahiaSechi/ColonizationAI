@@ -5,5 +5,6 @@ public enum RobotType {
     PIPELINER,
     HARVESTER,
     FARMER,
+    OPERATOR,
     CUSTOM,
 }
