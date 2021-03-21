@@ -7,6 +7,9 @@ import simulation.robots.Pos;
 import simulation.robots.Robot;
 
 public class Extractor extends Tool {
+    /**
+     * @param robot
+     */
     @Override
     public void use(Robot robot) {
         Pos pos = robot.getState().getPos();

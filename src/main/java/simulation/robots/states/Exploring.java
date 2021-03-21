@@ -10,6 +10,9 @@ import simulation.sensors.lv223.ViewSensor;
 import java.util.Optional;
 import java.util.Random;
 
+/**
+ *
+ */
 public class Exploring extends State {
     public Exploring(Pos pos) {
         super(pos);

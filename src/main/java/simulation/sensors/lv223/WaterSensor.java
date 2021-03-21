@@ -24,6 +24,10 @@ import simulation.planet.tiles.TileType;
 import simulation.robots.Pos;
 
 public class WaterSensor extends ViewSensor {
+    /**
+     * @param pos
+     * @return
+     */
     @Override
     public float getExploitationLevel(Pos pos) {
         Tile tile = planet.getTile(pos.getX(), pos.getY());

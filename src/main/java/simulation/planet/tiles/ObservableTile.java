@@ -22,6 +22,9 @@ package simulation.planet.tiles;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ *
+ */
 public abstract class ObservableTile {
     private List<Observer> observers;
 

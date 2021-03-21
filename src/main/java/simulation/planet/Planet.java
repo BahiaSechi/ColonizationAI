@@ -40,6 +40,9 @@ import java.util.List;
 @Data
 public class Planet implements Observer {
 
+    /**
+     *
+     */
     private       Tile[][]    map;
     private       List<Tile>  recentlyChangedTiles;
     private final int         SIZE_X      = 21;

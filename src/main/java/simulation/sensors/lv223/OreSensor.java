@@ -23,6 +23,9 @@ import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileType;
 import simulation.robots.Pos;
 
+/**
+ *
+ */
 public class OreSensor extends ViewSensor {
     @Override
     public float getExploitationLevel(Pos pos) {

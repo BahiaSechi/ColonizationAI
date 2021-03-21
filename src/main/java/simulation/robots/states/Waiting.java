@@ -6,6 +6,9 @@ import simulation.robots.Robot;
 
 import java.util.Optional;
 
+/**
+ *
+ */
 public class Waiting extends State {
     public Waiting(Pos pos) {
         super(pos);

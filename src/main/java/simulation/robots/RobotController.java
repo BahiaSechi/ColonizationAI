@@ -6,6 +6,9 @@ import lombok.Setter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public class RobotController {
     @Getter
     @Setter

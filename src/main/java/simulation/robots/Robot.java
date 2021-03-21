@@ -24,6 +24,11 @@ public class Robot {
     private ViewSensor   viewSensor;
     private Tool         tool;
 
+    /**
+     *
+     */
+    @Getter
+    @Setter
     private RobotType type;
 
     public Robot(int id, MoveStrategy movement, RobotController controller, State state, float epsilon, ViewSensor viewSensor, RobotType type) {
