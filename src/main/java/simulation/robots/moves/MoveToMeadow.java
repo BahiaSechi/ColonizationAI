@@ -14,9 +14,12 @@ public class MoveToMeadow extends MoveStrategy {
     public Pair<Pos, Action> bestMove(Robot robot) {
         State state = robot.getState();
         Pos pos = state.getPos();
-        int qState = pos.getY() * 23 + pos.getX();
+        int qState = pos.getY() * 21 + pos.getX();
         OperatorRobot operator = robot.getController().getOperator();
 
+        if (qState < 0) {
+            qState = 0;
+        }
         Action action = bestActionFromState(operator.getQArrayOres()[qState]);
         if (action == null) {
             return randomMove(robot);
