@@ -1,3 +1,23 @@
+/**
+ * Address :
+ * ENSICAEN
+ * 6 Boulevard Marechal Juin
+ * F-14050 Caen Cedex
+ * Note :
+ * This file is owned by an ENSICAEN student.  No portion of this
+ * document may be reproduced, copied  or revised without written
+ * permission of the authors.
+ *
+ * @author PRUNIER Bastien <bastien.prunier@ecole.ensicaen.fr>
+ * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
+ * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
+ * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
+ *
+ * @date February 2021
+ * @file Planet.java
+ * @version 1.0
+ */
+
 package simulation.planet;
 
 import com.fuzzylite.Engine;
@@ -6,25 +26,25 @@ import com.fuzzylite.Op;
 import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
+import lombok.Data;
 import simulation.planet.exception.MissingTileTypeException;
-import simulation.planet.tiles.Observer;
-import simulation.planet.tiles.Tile;
-import simulation.planet.tiles.TileFactory;
-import simulation.planet.tiles.TileType;
+import simulation.planet.tiles.*;
 import simulation.robots.Pos;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+@Data
 public class Planet implements Observer {
 
     private       Tile[][]   map;
     private       List<Tile> recentlyChangedTiles;
     private final int        SIZE_X      = 21;
-    private final int         SIZE_Y      = 21;
+    private final int SIZE_Y   = 21;
+    private final int         WIDTH       = 10;
+    private final int         HEIGHT      = 10;
     private       TileFactory tileFactory = new TileFactory();
     private       Engine      engine = null;
 
@@ -83,7 +103,7 @@ public class Planet implements Observer {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
                 TileType type = TileType.getType(initialState[y][x]);
-                map[y][x] = tileFactory.createTile(x, y, 10, 10, type);
+                map[y][x] = tileFactory.createTile(x, y, WIDTH, HEIGHT, type);
             }
         }
 
@@ -93,8 +113,6 @@ public class Planet implements Observer {
 
         try {
             this.engine = new FllImporter().fromFile(fileFLL);
-
-            //System.out.println(this.engine);
 
             StringBuilder status = new StringBuilder();
             if (!engine.isReady(status))
@@ -108,30 +126,6 @@ public class Planet implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public List<Tile> getRecentlyChangedTiles() {
-        return recentlyChangedTiles;
-    }
-
-    public Tile[][] getMap() {
-        return map;
-    }
-
-    public int getSIZE_X() {
-        return SIZE_X;
-    }
-
-    public int getSIZE_Y() {
-        return SIZE_Y;
-    }
-
-    public int[][] getSkeleton() {
-        return skeleton;
-    }
-
-    public int[][] getInitialState() {
-        return initialState;
     }
 
     public void update() {
@@ -155,14 +149,31 @@ public class Planet implements Observer {
         oreIn.setValue(sampledOre);
         waterIn.setValue(drawnedWater/1000);
         engine.process();
-        System.out.println("AAAAAAAAAAAAAA => " + Op.str(sampledOre) + " ## " + Op.str(drawnedWater) + " -> " + engine.getOutputValue("metamorphosis"));
 
         FuzzyLite.logger().info(String.format(
                 "obstacle.input = %s -> steer.output = %s",
                 Op.str(drawnedWater), Op.str(meta.getValue())));
 
+        analyseFuzzyLogicOutPut(meta.getValue());
 
         this.recentlyChangedTiles.clear();
+    }
+
+    private void analyseFuzzyLogicOutPut(double metamorphosisPourcentage) {
+        MetamorphosisType engineOutput = MetamorphosisType.getMetamorphosisType(metamorphosisPourcentage);
+        List<Tile> toModify = new LinkedList<>();
+
+        for (Tile temp: this.recentlyChangedTiles) {
+            for (Tile tile : this.getSurrounding(temp, engineOutput.metamorphosisArea)) {
+                if (!toModify.contains(tile)) {
+                    toModify.add(tile);
+                }
+            }
+        }
+
+        for (Tile tile : toModify) {
+            map[tile.getTileY()][tile.getTileX()] = this.tileFactory.createTile(tile.getTileX(), tile.getTileY(), WIDTH, HEIGHT, tile.nextTile());
+        }
     }
 
     private void afficheDebug() {
@@ -174,6 +185,11 @@ public class Planet implements Observer {
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param amount
+     */
     public void consumeResourcesOnRandomCase(TileType type, int amount) {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
@@ -186,11 +202,48 @@ public class Planet implements Observer {
         }
     }
 
-    public List<Tile> getSurrounding(Pos absolutePos) {
-        return List.of(null);
-    }
-
+    /**
+     * A getter function to find the tile according to x and y.
+     * @param x Abscissa axis.
+     * @param y Ordinate axis.
+     * @return The tile on the position (x,y).
+     */
     public Tile getTile(int x, int y) {
         return this.map[y][x];
+    }
+
+    /**
+     * A function to get the neighbors of a tile according to a given position.
+     * @param position The position of the tile.
+     * @param degree The number of neighbors we want to get.
+     * @return A list of the tiles surrounding our tile according to the degree.
+     */
+    public List<Tile> getSurrounding(Pos position, int degree) {
+        return getSurrounding(map[position.getY()][position.getX()], degree);
+    }
+
+    /**
+     * A function to get the neighbors of a tile.
+     * @param tile The tile we are looking at.
+     * @param degree The number of neighbors we want to get. If it is degree 2, we get 8 neighbors of our tile and their
+     *               neighbors.
+     * @return A list of the tiles surrounding our tile according to the degree. Example : Degree = 1 ; We get the 8
+     * neighbors.
+     */
+    public List<Tile> getSurrounding(Tile tile, int degree) {
+        List<Tile> tilesAround = new LinkedList<>();
+
+        for (int y = -degree ; y <= degree ; y++) {
+            for (int x = -degree ; x <= degree; x++) {
+
+                int newY = tile.getTileY()+y;
+                int newX = tile.getTileX()+x;
+
+                if (newY >= 0 && newX >= 0 && newX <= this.SIZE_X && newY <= this.SIZE_Y) {
+                    tilesAround.add(map[newY][newX]);
+                }
+            }
+        }
+        return tilesAround;
     }
 }

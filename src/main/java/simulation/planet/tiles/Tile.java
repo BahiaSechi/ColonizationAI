@@ -1,11 +1,33 @@
+/**
+ * Address :
+ * ENSICAEN
+ * 6 Boulevard Marechal Juin
+ * F-14050 Caen Cedex
+ * Note :
+ * This file is owned by an ENSICAEN student.  No portion of this
+ * document may be reproduced, copied  or revised without written
+ * permission of the authors.
+ *
+ * @author PRUNIER Bastien <bastien.prunier@ecole.ensicaen.fr>
+ * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
+ * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
+ * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
+ *
+ * @date February 2021
+ * @file Tile.java
+ * @version 1.0
+ */
+
 package simulation.planet.tiles;
 
+import lombok.Data;
 import simulation.planet.exploitability.Exploitability;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+@Data
 public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
@@ -28,7 +50,6 @@ public class Tile extends ObservableTile {
         // percentages.
     }
 
-    //
     /**
      * Extract the specified resources.
      *
@@ -45,52 +66,6 @@ public class Tile extends ObservableTile {
             return oldCurrent<amount ? amount-oldCurrent : 0;
         }
         return amount;
-    }
-
-    // Getters & Setters
-
-    public int getTileX() {
-        return tileX;
-    }
-
-    public void setTileX(int tileX) {
-        this.tileX = tileX;
-    }
-
-    public int getTileY() {
-        return tileY;
-    }
-
-    public void setTileY(int tileY) {
-        this.tileY = tileY;
-    }
-
-    public int getTileWidth() {
-        return tileWidth;
-    }
-
-    public void setTileWidth(int tileWidth) {
-        this.tileWidth = tileWidth;
-    }
-
-    public int getTileHeight() {
-        return tileHeight;
-    }
-
-    public void setTileHeight(int tileHeight) {
-        this.tileHeight = tileHeight;
-    }
-
-    public TileType getType() {
-        return type;
-    }
-
-    public void setType(TileType type) {
-        this.type = type;
-    }
-
-    public Exploitability getExploitability() {
-        return exploitability;
     }
 
     /**
@@ -119,6 +94,5 @@ public class Tile extends ObservableTile {
 
         return tileType;
     }
-
 
 }
