@@ -29,8 +29,8 @@ public class RobotController {
     }
 
     public Pos getAbsolutePos(Robot robot) {
-        return new Pos(colonyCenter.getX() + robot.getMovement().getCurrentPos().getX(),
-                colonyCenter.getY() + robot.getMovement().getCurrentPos().getY());
+        return new Pos(colonyCenter.getX() + robot.getState().getPos().getX(),
+                colonyCenter.getY() + robot.getState().getPos().getY());
     }
 
     public int getTileNumber(Pos pos) {
