@@ -32,6 +32,9 @@ import javafx.stage.Stage;
 import simulation.Game;
 import simulation.planet.Planet;
 import simulation.planet.tiles.Tile;
+import simulation.robots.Robot;
+
+import java.util.Map;
 
 public class PlanetController extends Application {
 
@@ -49,6 +52,7 @@ public class PlanetController extends Application {
         GridPane gridpane = new GridPane();
         Game game = new Game();
         Planet planet = game.getPlanet();
+        Map<Integer, Robot> robotMap = game.getRobotController().getRobots();
 
         stage.show();
         Scene scene = new Scene(gridpane, 24 * planet.getSIZE_X(), 24 * planet.getSIZE_Y());
@@ -56,12 +60,12 @@ public class PlanetController extends Application {
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                runLap(planet, gridpane);
+                runLap(planet, gridpane, robotMap);
             }
         }.start();
     }
 
-    private void runLap(Planet planet, GridPane gridpane) {
+    private void runLap(Planet planet, GridPane gridpane, Map<Integer, Robot> robotMap) {
 
         Tile[][] tile = planet.getMap();
 
@@ -85,6 +89,25 @@ public class PlanetController extends Application {
                 GridPane.setConstraints(imgView, i, j);
                 gridpane.getChildren().addAll(imgView);
             }
+        }
+
+        // PRINTING ROBOTS
+        for (Map.Entry<Integer, Robot> entry : robotMap.entrySet()) {
+
+            Robot rob = entry.getValue();
+            String fileName = rob.getType().getNameFile();
+            Image img = new Image(fileName);
+
+            int posX = rob.getState().getPos().getX();
+            int posY = rob.getState().getPos().getY();
+
+            ImageView imgV = new ImageView();
+
+            imgV.setImage(img);
+            imgV.toFront();
+
+            GridPane.setConstraints(imgV, posY, posX);
+            gridpane.getChildren().add(imgV);
         }
     }
 
