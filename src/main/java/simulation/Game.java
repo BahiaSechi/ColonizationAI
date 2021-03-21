@@ -23,10 +23,14 @@ package simulation;
 import simulation.planet.Planet;
 import simulation.planet.exception.MissingTileTypeException;
 import simulation.planet.tiles.TileType;
+import simulation.robots.Pos;
+import simulation.robots.RobotController;
+import simulation.robots.RobotFactory;
 
 public class Game {
 
-    private Planet planet;
+    private Planet          planet;
+    private RobotController robotController;
 
     public Game() {
 
@@ -37,6 +41,9 @@ public class Game {
         } catch (MissingTileTypeException e) {
             e.printStackTrace();
         }
+
+        int aId = 0;
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0)));
 
     }
 
