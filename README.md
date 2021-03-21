@@ -8,10 +8,9 @@ This is a robot planet colonization simulator.
 
 ## User manual
 
-**Step 1:** Launch the game
+### Launch the simulator
 
-1. 
-2. 
-3. 
-
+Move in the root directory and run the following commands :
+1. ``mvn compile``
+2. ``mvn javafx:run``
 

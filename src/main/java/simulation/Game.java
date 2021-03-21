@@ -20,7 +20,6 @@
 package simulation;
 
 import lombok.Getter;
-import lombok.Setter;
 import simulation.planet.Planet;
 import simulation.planet.exception.MissingTileTypeException;
 import simulation.robots.Pos;
@@ -52,6 +51,9 @@ public class Game {
         robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0)));
     }
 
+    /**
+     *
+     */
     public void runDay() {
         // RUN THE ROBOTS
         robotController.runDay();
