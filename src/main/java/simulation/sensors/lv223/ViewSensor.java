@@ -10,7 +10,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class ViewSensor {
-    private Planet planet;
+    protected Planet planet;
+
+    public abstract float getExploitationLevel(Pos pos);
 
     public int ratePos(Robot robot) {
         if (isCurrentExploitable(robot) > 0.0) return 5;

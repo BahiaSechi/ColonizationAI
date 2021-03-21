@@ -23,12 +23,6 @@ public abstract class MoveStrategy {
      */
     @Getter
     @Setter
-    private Pos     currentPos;
-    @Getter
-    @Setter
-    private Pos     lastPos;
-    @Getter
-    @Setter
     private boolean goingToBase = false;
     @Getter
     @Setter
@@ -100,5 +94,53 @@ public abstract class MoveStrategy {
         }
 
         return new Pair<>(newPos, action);
+    }
+
+    protected Action bestActionFromState(int[] actions) {
+        if (actions.length > 4) {
+            return null;
+        }
+        int max = -1;
+
+        for (int action : actions) {
+            if (action > max) max = action;
+        }
+
+        switch (max) {
+            case 0:
+                return Action.MOVE_UP;
+            case 1:
+                return Action.MOVE_DOWN;
+            case 2:
+                return Action.MOVE_LEFT;
+            case 3:
+                return Action.MOVE_RIGHT;
+            default:
+                return null;
+        }
+    }
+
+    protected Pos doAction(Robot robot, Action action) {
+        Pos currentPos = robot.getState().getPos();
+        Pos newPos;
+
+        switch (action) {
+            case MOVE_UP:
+                newPos = new Pos(currentPos.getX(), currentPos.getY() + 1);
+                break;
+            case MOVE_DOWN:
+                newPos = new Pos(currentPos.getX(), currentPos.getY() - 1);
+                break;
+            case MOVE_LEFT:
+                newPos = new Pos(currentPos.getX() - 1, currentPos.getY());
+                break;
+            case MOVE_RIGHT:
+                newPos = new Pos(currentPos.getX() + 1, currentPos.getY());
+                break;
+            default:
+                newPos = currentPos;
+        }
+
+        return newPos;
     }
 }

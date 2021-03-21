@@ -1,16 +1,19 @@
 package simulation.sensors.lv223;
 
 import simulation.planet.tiles.Tile;
+import simulation.planet.tiles.TileType;
 import simulation.robots.Pos;
 
-public class NoSensor extends ViewSensor {
+public class FoodSensor extends ViewSensor {
     @Override
     public float getExploitationLevel(Pos pos) {
-        return 0.0f;
+        return 0;
     }
 
     @Override
     double isExploitable(Tile tile) {
-        return 0;
+        if (tile.getType() == TileType.FOOD) return 1.0;
+
+        return 0.0;
     }
 }
