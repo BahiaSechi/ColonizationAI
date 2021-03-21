@@ -134,6 +134,9 @@ public class Planet implements Observer {
         FuzzyLite.logger().info(String.format(
                 "obstacle.input = %s -> steer.output = %s",
                 Op.str(drawnedWater), Op.str(meta.getValue())));
+        //meta.fuzzyOutputValue()
+        analyseFuzzyLogicOutPut(meta.getValue());
+
 
         System.out.println("My Tile" + this.recentlyChangedTiles.get(0));
         for (Tile temp: this.getSurrounding(this.recentlyChangedTiles.get(0), 2)) {
@@ -142,6 +145,14 @@ public class Planet implements Observer {
 
         this.recentlyChangedTiles.clear();
 
+    }
+
+    private void analyseFuzzyLogicOutPut(double metamorphosisPourcentage) {
+        //switch (metamorphosisPourcentage)
+
+        for (Tile temp: this.recentlyChangedTiles) {
+            System.out.println("Surroudings" + temp);
+        }
     }
 
     private void afficheDebug() {
