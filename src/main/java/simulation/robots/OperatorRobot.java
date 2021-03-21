@@ -20,10 +20,10 @@ public class OperatorRobot extends Robot {
     private double meadowExploitationLimit = 0.5;
     private double foodExploitationLimit   = 0.5;
 
-    private int[][] qArrayOres   = new int[529][4];
-    private int[][] qArrayWater  = new int[529][4];
-    private int[][] qArrayMeadow = new int[529][4];
-    private int[][] qArrayFood   = new int[529][4];
+    private int[][] qArrayOres   = new int[441][4];
+    private int[][] qArrayWater  = new int[441][4];
+    private int[][] qArrayMeadow = new int[441][4];
+    private int[][] qArrayFood   = new int[441][4];
 
     public OperatorRobot(RobotController controller, int id, Planet planet) {
         super(id, new Immobile(), controller, new Waiting(new Pos(0, 0)), 0.0f, new NoSensor(planet), RobotType.OPERATOR);
