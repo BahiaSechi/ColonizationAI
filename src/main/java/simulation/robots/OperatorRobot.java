@@ -10,33 +10,24 @@ import simulation.robots.tools.*;
 import simulation.sensors.lv223.NoSensor;
 import simulation.sensors.lv223.ViewSensor;
 
+@Getter
+@Setter
 public class OperatorRobot extends Robot {
 
-    @Getter
-    @Setter
     private double oreExploitationLimit    = 0.5;
-    @Getter
-    @Setter
     private double waterExploitationLimit  = 0.5;
-    @Getter
-    @Setter
     private double meadowExploitationLimit = 0.5;
-    @Getter
-    @Setter
     private double foodExploitationLimit   = 0.5;
 
-    @Getter
-    @Setter
     private int[][] qArrayOres   = new int[529][4];
-    @Getter
-    @Setter
     private int[][] qArrayWater  = new int[529][4];
-    @Getter
-    @Setter
     private int[][] qArrayMeadow = new int[529][4];
-    @Getter
-    @Setter
     private int[][] qArrayFood   = new int[529][4];
+
+    private int oreStock   = 100;
+    private int foodStock  = 100;
+    private int waterStock = 2000;
+
 
     public OperatorRobot(RobotController controller, int id) {
         super(id, new Immobile(), controller, new Waiting(new Pos(0, 0)), 0.0f, new NoSensor(), RobotType.OPERATOR);
