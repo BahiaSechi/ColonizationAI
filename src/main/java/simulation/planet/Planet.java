@@ -172,6 +172,11 @@ public class Planet implements Observer {
         this.recentlyChangedTiles.clear();
     }
 
+    /**
+     * Analyse the value returned by the engine.
+     *
+     * @param metamorphosisPourcentage The pourcentage to analyse.
+     */
     private void analyseFuzzyLogicOutPut(double metamorphosisPourcentage) {
         MetamorphosisType engineOutput = MetamorphosisType.getMetamorphosisType(metamorphosisPourcentage);
         List<Tile> toModify = new LinkedList<>();

@@ -11,30 +11,17 @@ import simulation.sensors.lv223.ViewSensor;
 
 import java.util.Optional;
 
-
+@Getter
+@Setter
 public class Robot {
     private int             id;
-    @Getter
-    @Setter
     private RobotController controller;
-    @Getter
-    @Setter
     private float           health;
 
-    @Getter
-    @Setter
     private MoveStrategy movement;
-    @Getter
-    @Setter
     private float        epsilon;
-    @Getter
-    @Setter
     private State        state;
-    @Getter
-    @Setter
     private ViewSensor   viewSensor;
-    @Getter
-    @Setter
     private Tool         tool;
 
     /**
