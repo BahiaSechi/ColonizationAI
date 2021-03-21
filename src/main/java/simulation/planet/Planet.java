@@ -27,12 +27,14 @@ import com.fuzzylite.imex.FllImporter;
 import com.fuzzylite.variable.InputVariable;
 import com.fuzzylite.variable.OutputVariable;
 import lombok.Data;
+import simulation.planet.exception.EmptyExploitableTileException;
 import simulation.planet.exception.MissingTileTypeException;
 import simulation.planet.tiles.*;
 import simulation.robots.Pos;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -137,12 +139,16 @@ public class Planet implements Observer {
         double drawnedWater = 0.0f;
         double sampledOre = 0.0f;
 
-        for (Tile tmp : this.recentlyChangedTiles) {
-            double extractedResources = tmp.getExploitability().getMax() - tmp.getExploitability().getCurrent();
-            if (tmp.getType() == TileType.ORE) {
-                sampledOre += extractedResources;
-            } else if (tmp.getType() == TileType.WATER) {
-                drawnedWater += extractedResources;
+        for (int y = 0; y < SIZE_Y; y++) {
+            for (int x = 0; x < SIZE_X; x++) {
+                if (map[y][x].getExploitability().isExploitable()) {
+                    double extractedResources = map[y][x].getExploitability().getMax() - map[y][x].getExploitability().getCurrent();
+                    if (map[y][x].getType() == TileType.ORE) {
+                        sampledOre += extractedResources;
+                    } else if (map[y][x].getType() == TileType.WATER) {
+                        drawnedWater += extractedResources;
+                    }
+                }
             }
         }
 
@@ -163,10 +169,17 @@ public class Planet implements Observer {
         MetamorphosisType engineOutput = MetamorphosisType.getMetamorphosisType(metamorphosisPourcentage);
         List<Tile> toModify = new LinkedList<>();
 
-        for (Tile temp: this.recentlyChangedTiles) {
-            for (Tile tile : this.getSurrounding(temp, engineOutput.metamorphosisArea)) {
-                if (!toModify.contains(tile)) {
-                    toModify.add(tile);
+        if (engineOutput == MetamorphosisType.IMPORTANT) {
+            for (int y = 0; y < SIZE_Y; y++) {
+                toModify.addAll(Arrays.asList(map[y]).subList(0, SIZE_X));
+            }
+
+        } else {
+            for (Tile temp : this.recentlyChangedTiles) {
+                for (Tile tile : this.getSurrounding(temp, engineOutput.metamorphosisArea)) {
+                    if (!toModify.contains(tile)) {
+                        toModify.add(tile);
+                    }
                 }
             }
         }
@@ -186,20 +199,21 @@ public class Planet implements Observer {
     }
 
     /**
+     * Exploit a specifique tile.
      *
-     * @param type
-     * @param amount
+     * @param position The position of the Tile on the map.
+     * @param amount The amount to exploit on the tile.
      */
-    public void consumeResourcesOnRandomCase(TileType type, int amount) {
-        for (int y = 0; y < SIZE_Y; y++) {
-            for (int x = 0; x < SIZE_X; x++) {
-                if (map[y][x].getType() == type) {
-                    amount = map[y][x].exploit(amount);
-                    this.recentlyChangedTiles.add(map[y][x]);
-                    if (amount == 0) return;
-                }
-            }
+    public void exploit(Pos position, int amount) {
+        int x = position.getX();
+        int y = position.getY();
+        Tile tileTmp = this.map[y][x];
+        try {
+            tileTmp.exploit(amount);
+        } catch (EmptyExploitableTileException e) {
+            this.map[y][x] = tileFactory.createTile(x, y, WIDTH, HEIGHT, tileTmp.getAfterTotalExploit());
         }
+        this.recentlyChangedTiles.add(tileTmp);
     }
 
     /**
@@ -239,7 +253,7 @@ public class Planet implements Observer {
                 int newY = tile.getTileY()+y;
                 int newX = tile.getTileX()+x;
 
-                if (newY >= 0 && newX >= 0 && newX <= this.SIZE_X && newY <= this.SIZE_Y) {
+                if (newY >= 0 && newX >= 0 && newX < this.SIZE_X && newY < this.SIZE_Y) {
                     tilesAround.add(map[newY][newX]);
                 }
             }

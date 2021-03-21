@@ -21,6 +21,7 @@
 package simulation.planet.tiles;
 
 import lombok.Data;
+import simulation.planet.exception.EmptyExploitableTileException;
 import simulation.planet.exploitability.Exploitability;
 
 import java.util.Comparator;
@@ -34,10 +35,12 @@ public class Tile extends ObservableTile {
     private TileType            type;
     private Exploitability      exploitability;
     private List<Metamorphosis> metamorphoses;
+    private TileType afterTotalExploit;
 
     // Constructor
     public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type,
-                Exploitability exploitability, List<Metamorphosis> metamorphoses) {
+                Exploitability exploitability, List<Metamorphosis> metamorphoses, TileType afterTotalExploit) {
+        super();
         this.tileX = tileX;
         this.tileY = tileY;
         this.tileWidth = tileWidth;
@@ -48,24 +51,17 @@ public class Tile extends ObservableTile {
         this.metamorphoses.sort(Comparator.comparing(m -> m.percentage));
         // Sort the metamorphoses possibilities, this way we can directly draw a random number and compare it to the
         // percentages.
+        this.afterTotalExploit = afterTotalExploit;
     }
 
     /**
      * Extract the specified resources.
      *
-     * TODO Implement BETTER exploit
-     *
      * @param amount The amount of resources to extract.
-     * @return The amount left to extract if there not enough left of resources.
      */
-    public int exploit(int amount) {
-        if (this.exploitability.getMax() != 0) {
-            int oldCurrent = this.exploitability.getCurrent();
-            int newCurrent = oldCurrent - amount;
-            this.exploitability.setCurrent(Math.max(newCurrent, 0));
-            return oldCurrent<amount ? amount-oldCurrent : 0;
-        }
-        return amount;
+    public void exploit(int amount) throws EmptyExploitableTileException {
+        if (this.exploitability.isExploitable())
+            this.exploitability.exploit(amount);
     }
 
     /**

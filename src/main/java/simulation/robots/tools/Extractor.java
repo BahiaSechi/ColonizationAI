@@ -12,7 +12,7 @@ public class Extractor extends Tool {
         Pos pos = robot.getState().getPos();
         Tile tile = planet.getTile(pos.getX(), pos.getY());
         if (tile.getType() == TileType.ORE) {
-            tile.exploit(1);
+            planet.exploit(pos, 1);
         }
     }
 }

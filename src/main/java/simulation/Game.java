@@ -38,12 +38,6 @@ public class Game {
             e.printStackTrace();
         }
 
-        for (int i=0 ; i<20 ; i++) {
-            planet.consumeResourcesOnRandomCase(TileType.WATER, 500);
-            planet.consumeResourcesOnRandomCase(TileType.ORE, 5);
-            planet.update();
-        }
-
     }
 
     public Planet getPlanet() {
