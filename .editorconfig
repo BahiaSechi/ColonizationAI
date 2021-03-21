@@ -14,6 +14,7 @@ ij_smart_tabs = false
 ij_visual_guides = none
 ij_wrap_on_typing = false
 
+
 [*.css]
 ij_css_align_closing_brace_with_properties = false
 ij_css_blank_lines_around_nested_selector = 1
@@ -1362,7 +1363,7 @@ ij_properties_key_value_delimiter = equals
 ij_properties_spaces_around_key_value_delimiter = false
 
 [{*.yaml, *.yml}]
-indent_size = 2
+indent_size = 4
 ij_yaml_align_values_properties = do_not_align
 ij_yaml_autoinsert_sequence_marker = true
 ij_yaml_block_mapping_on_new_line = false

@@ -1,0 +1,29 @@
+image: maven:latest
+
+stages:
+    - build
+    - run
+
+cache:
+    paths:
+        - .m2/repository/
+        - target/
+
+build:
+    stage: build
+    script:
+        - mvn compile
+    only:
+        - merge_requests
+    when: always
+
+run:
+    stage: run
+    script:
+        - mvn package
+    only:
+        - merge_requests
+    when: always
+    artifacts:
+        paths:
+            - target/colonisation_prunier_rabotin_sechi_servat-1.0.jar
