@@ -11,7 +11,7 @@ public class Gloves extends Tool {
         Pos pos = robot.getState().getPos();
         Tile tile = planet.getTile(pos.getX(), pos.getY());
         if (tile.getType() == TileType.FOOD) {
-            tile.exploit();
+            tile.exploit(1);
         }
     }
 }
