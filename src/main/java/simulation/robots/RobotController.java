@@ -46,5 +46,8 @@ public class RobotController {
      * Run the day for robots, move each robot on his daily tasks.
      */
     public void runDay() {
+        for (Robot robot : robots.values()) {
+            robot.nextMove();
+        }
     }
 }
