@@ -39,11 +39,11 @@ public class OperatorRobot extends Robot {
     private int[][] qArrayFood   = new int[529][4];
 
     public OperatorRobot(RobotController controller, int id) {
-        super(id, new Immobile(), controller, new Waiting(new Pos(0, 0)), 0.0f, new NoSensor());
+        super(id, new Immobile(), controller, new Waiting(new Pos(0, 0)), 0.0f, new NoSensor(), RobotType.OPERATOR);
     }
 
     public OperatorRobot(MoveStrategy movement, RobotController controller, State state, float epsilon, ViewSensor viewSensor, int id) {
-        super(id, movement, controller, state, epsilon, viewSensor);
+        super(id, movement, controller, state, epsilon, viewSensor, RobotType.OPERATOR);
     }
 
     public boolean allowExploitation(Robot robot) {
