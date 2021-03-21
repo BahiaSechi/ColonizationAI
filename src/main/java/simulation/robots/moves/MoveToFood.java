@@ -18,6 +18,9 @@ public class MoveToFood extends MoveStrategy {
         OperatorRobot operator = robot.getController().getOperator();
 
         Action action = bestActionFromState(operator.getQArrayFood()[qState]);
+        if (action == null) {
+            return randomMove(robot);
+        }
 
         return new Pair<>(doAction(robot, action), action);
     }

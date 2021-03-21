@@ -104,12 +104,18 @@ public abstract class MoveStrategy {
             return null;
         }
         int max = -1;
+        int actionId = -1;
 
-        for (int action : actions) {
-            if (action > max) max = action;
+        for (int i = 0; i < 4; i++) {
+            if (actions[i] > max) max = actions[i];
+            actionId = i;
         }
 
-        switch (max) {
+        if (max == 0) {
+            return null;
+        }
+
+        switch (actionId) {
             case 0:
                 return Action.MOVE_UP;
             case 1:

@@ -18,6 +18,9 @@ public class MoveToWater extends MoveStrategy {
         OperatorRobot operator = robot.getController().getOperator();
 
         Action action = bestActionFromState(operator.getQArrayWater()[qState]);
+        if (action == null) {
+            return randomMove(robot);
+        }
 
         return new Pair<>(doAction(robot, action), action);
     }
