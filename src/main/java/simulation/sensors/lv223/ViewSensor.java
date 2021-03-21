@@ -34,6 +34,10 @@ import java.util.stream.Collectors;
 public abstract class ViewSensor {
     protected Planet planet;
 
+    public ViewSensor(Planet planet) {
+        this.planet = planet;
+    }
+
     public abstract float getExploitationLevel(Pos pos);
 
     public int ratePos(Robot robot) {

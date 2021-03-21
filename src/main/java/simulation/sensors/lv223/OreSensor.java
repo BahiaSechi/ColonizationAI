@@ -19,6 +19,7 @@
 
 package simulation.sensors.lv223;
 
+import simulation.planet.Planet;
 import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileType;
 import simulation.robots.Pos;
@@ -27,6 +28,10 @@ import simulation.robots.Pos;
  *
  */
 public class OreSensor extends ViewSensor {
+    public OreSensor(Planet planet) {
+        super(planet);
+    }
+
     @Override
     public float getExploitationLevel(Pos pos) {
         Tile tile = planet.getTile(pos.getX(), pos.getY());

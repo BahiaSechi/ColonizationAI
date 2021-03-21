@@ -2,6 +2,7 @@ package simulation.robots;
 
 import lombok.Getter;
 import lombok.Setter;
+import simulation.planet.Planet;
 import simulation.robots.moves.Immobile;
 import simulation.robots.moves.MoveStrategy;
 import simulation.robots.states.State;
@@ -24,8 +25,8 @@ public class OperatorRobot extends Robot {
     private int[][] qArrayMeadow = new int[529][4];
     private int[][] qArrayFood   = new int[529][4];
 
-    public OperatorRobot(RobotController controller, int id) {
-        super(id, new Immobile(), controller, new Waiting(new Pos(0, 0)), 0.0f, new NoSensor(), RobotType.OPERATOR);
+    public OperatorRobot(RobotController controller, int id, Planet planet) {
+        super(id, new Immobile(), controller, new Waiting(new Pos(0, 0)), 0.0f, new NoSensor(planet), RobotType.OPERATOR);
     }
 
     public OperatorRobot(MoveStrategy movement, RobotController controller, State state, float epsilon, ViewSensor viewSensor, int id) {

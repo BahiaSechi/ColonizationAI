@@ -19,11 +19,16 @@
 
 package simulation.sensors.lv223;
 
+import simulation.planet.Planet;
 import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileType;
 import simulation.robots.Pos;
 
 public class WaterSensor extends ViewSensor {
+    public WaterSensor(Planet planet) {
+        super(planet);
+    }
+
     /**
      * @param pos
      * @return

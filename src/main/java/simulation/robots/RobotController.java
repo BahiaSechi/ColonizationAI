@@ -2,6 +2,7 @@ package simulation.robots;
 
 import lombok.Getter;
 import lombok.Setter;
+import simulation.planet.Planet;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,9 +21,9 @@ public class RobotController {
     @Setter
     private Map<Integer, Robot> robots;
 
-    public RobotController(Pos colonyCenter) {
+    public RobotController(Pos colonyCenter, Planet planet) {
         this.colonyCenter = colonyCenter;
-        this.operator = new OperatorRobot(this, 0);
+        this.operator = new OperatorRobot(this, 0, planet);
         this.robots = new HashMap<>();
     }
 

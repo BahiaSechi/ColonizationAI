@@ -39,7 +39,7 @@ public class Game {
     public Game() {
 
         planet = new Planet();
-        robotController = new RobotController(new Pos(planet.getSIZE_X()/2, planet.getSIZE_Y()/2));
+        robotController = new RobotController(new Pos(planet.getSIZE_X()/2, planet.getSIZE_Y()/2), planet);
 
         try {
             planet.initialize();
@@ -48,7 +48,7 @@ public class Game {
         }
 
         int aId = 0;
-        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0)));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0), planet));
     }
 
     /**
