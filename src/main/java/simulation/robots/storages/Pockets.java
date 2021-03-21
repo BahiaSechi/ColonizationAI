@@ -1,4 +1,4 @@
 package simulation.robots.storages;
 
-public class Pockets implements Storage{
+public class Pockets implements Storage {
 }

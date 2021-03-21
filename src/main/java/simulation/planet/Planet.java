@@ -12,7 +12,6 @@
  * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
  * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
  * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
- *
  * @date February 2021
  * @file Planet.java
  * @version 1.0
@@ -41,16 +40,18 @@ import java.util.List;
 @Data
 public class Planet implements Observer {
 
-    private       Tile[][]   map;
-    private       List<Tile> recentlyChangedTiles;
-    private final int        SIZE_X      = 21;
-    private final int SIZE_Y   = 21;
+    private       Tile[][]    map;
+    private       List<Tile>  recentlyChangedTiles;
+    private final int         SIZE_X      = 21;
+    private final int         SIZE_Y      = 21;
     private final int         WIDTH       = 10;
     private final int         HEIGHT      = 10;
     private       TileFactory tileFactory = new TileFactory();
-    private       Engine      engine = null;
+    private       Engine      engine      = null;
 
-    /** The skeleton of the planet */
+    /**
+     * The skeleton of the planet
+     */
     private final int[][] skeleton = {
             {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
             {1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1},
@@ -153,7 +154,7 @@ public class Planet implements Observer {
         }
 
         oreIn.setValue(sampledOre);
-        waterIn.setValue(drawnedWater/1000);
+        waterIn.setValue(drawnedWater / 1000);
         engine.process();
 
         FuzzyLite.logger().info(String.format(
@@ -247,11 +248,11 @@ public class Planet implements Observer {
     public List<Tile> getSurrounding(Tile tile, int degree) {
         List<Tile> tilesAround = new LinkedList<>();
 
-        for (int y = -degree ; y <= degree ; y++) {
-            for (int x = -degree ; x <= degree; x++) {
+        for (int y = -degree; y <= degree; y++) {
+            for (int x = -degree; x <= degree; x++) {
 
-                int newY = tile.getTileY()+y;
-                int newX = tile.getTileX()+x;
+                int newY = tile.getTileY() + y;
+                int newX = tile.getTileX() + x;
 
                 if (newY >= 0 && newX >= 0 && newX < this.SIZE_X && newY < this.SIZE_Y) {
                     tilesAround.add(map[newY][newX]);

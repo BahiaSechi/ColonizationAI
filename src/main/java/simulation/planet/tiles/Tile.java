@@ -12,7 +12,6 @@
  * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
  * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
  * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
- *
  * @date February 2021
  * @file Tile.java
  * @version 1.0
@@ -35,7 +34,7 @@ public class Tile extends ObservableTile {
     private TileType            type;
     private Exploitability      exploitability;
     private List<Metamorphosis> metamorphoses;
-    private TileType afterTotalExploit;
+    private TileType            afterTotalExploit;
 
     // Constructor
     public Tile(int tileX, int tileY, int tileWidth, int tileHeight, TileType type,

@@ -12,7 +12,6 @@
  * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
  * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
  * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
- *
  * @date February 2021
  * @file Game.java
  * @version 1.0
@@ -22,11 +21,14 @@ package simulation;
 
 import simulation.planet.Planet;
 import simulation.planet.exception.MissingTileTypeException;
-import simulation.planet.tiles.TileType;
+import simulation.robots.Pos;
+import simulation.robots.RobotController;
+import simulation.robots.RobotFactory;
 
 public class Game {
 
-    private Planet planet;
+    private Planet          planet;
+    private RobotController robotController;
 
     public Game() {
 
@@ -37,6 +39,9 @@ public class Game {
         } catch (MissingTileTypeException e) {
             e.printStackTrace();
         }
+
+        int aId = 0;
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0)));
 
     }
 

@@ -12,7 +12,6 @@
  * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
  * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
  * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
- *
  * @date February 2021
  * @file PlanetController.java
  * @version 1.0
@@ -30,11 +29,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import simulation.planet.Planet;
 import simulation.Game;
+import simulation.planet.Planet;
 import simulation.planet.tiles.Tile;
-import simulation.planet.tiles.TileType;
-import simulation.robots.Pos;
 
 public class PlanetController extends Application {
 
@@ -57,10 +54,8 @@ public class PlanetController extends Application {
         Scene scene = new Scene(gridpane, 24 * planet.getSIZE_X(), 24 * planet.getSIZE_Y());
         stage.setScene(scene);
 
-        new AnimationTimer()
-        {
-            public void handle(long currentNanoTime)
-            {
+        new AnimationTimer() {
+            public void handle(long currentNanoTime) {
                 runLap(planet, gridpane);
             }
         }.start();
