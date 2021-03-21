@@ -50,8 +50,12 @@ public class Game {
 
     }
 
-    public Planet getPlanet() {
-        return planet;
+    public void runDay() {
+        // RUN THE ROBOTS
+        robotController.runDay();
+
+        // RUN THE PLANET
+        planet.update();
     }
 }
 

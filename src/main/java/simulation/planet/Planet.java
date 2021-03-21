@@ -131,6 +131,9 @@ public class Planet implements Observer {
         }
     }
 
+    /**
+     * Update the planet at the end of the day after robots took resources.
+     */
     public void update() {
         //recuperation of the different engine variables
         InputVariable oreIn = engine.getInputVariable("sampledOre");

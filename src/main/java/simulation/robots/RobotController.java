@@ -41,4 +41,10 @@ public class RobotController {
         return new Pos(colonyCenter.getX() + robot.getState().getPos().getX(),
                 colonyCenter.getY() + robot.getState().getPos().getY());
     }
+
+    /**
+     * Run the day for robots, move each robot on his daily tasks.
+     */
+    public void runDay() {
+    }
 }

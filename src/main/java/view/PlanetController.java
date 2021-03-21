@@ -38,6 +38,7 @@ import java.util.Map;
 
 public class PlanetController extends Application {
 
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -59,23 +60,24 @@ public class PlanetController extends Application {
         stage.setScene(scene);
 
         new AnimationTimer() {
+            private int dayDecount = 2922;
             public void handle(long currentNanoTime) {
-                runLap(planet, gridpane, robotMap);
+                if (this.dayDecount >= 0) {
+                    game.runDay();
+                    generateView(planet, gridpane, robotMap);
+                    dayDecount--;
+                } else {
+                    this.stop();
+                }
             }
         }.start();
     }
 
-    private void runLap(Planet planet, GridPane gridpane, Map<Integer, Robot> robotMap) {
+    private void generateView(Planet planet, GridPane gridpane, Map<Integer, Robot> robotMap) {
 
         Tile[][] tile = planet.getMap();
 
-        // RUN THE ROBOTS
-
-
-        // RUN THE PLANET
-        planet.update();
-
-        // SHOW THE SCENE
+        // PRINTING THE PLANET
         gridpane.getChildren().clear();
         for (int i = 0; i < planet.getSIZE_Y(); i++) {
             for (int j = 0; j < planet.getSIZE_X(); j++) {
