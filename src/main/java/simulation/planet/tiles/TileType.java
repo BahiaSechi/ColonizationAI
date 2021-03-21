@@ -19,8 +19,6 @@
 
 package simulation.planet.tiles;
 
-import lombok.Getter;
-import lombok.Setter;
 import simulation.planet.exception.MissingTileTypeException;
 
 import java.util.List;

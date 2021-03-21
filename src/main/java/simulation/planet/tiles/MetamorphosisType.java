@@ -12,7 +12,6 @@
  * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
  * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
  * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
- *
  * @date February 2021
  * @file MetamorphosisType.java
  * @version 1.0
@@ -24,11 +23,11 @@ package simulation.planet.tiles;
  * Describe the shape of the membership function graph for the metamorphosis.
  */
 public enum MetamorphosisType {
-    LIMITED(0,0,1,5, 1),
-    SMALL(1,5,10,15, 2),
-    MEDIUM(10,15,50,60, 3),
-    LARGE(50,60,75,85, 5),
-    IMPORTANT(75,85,100,100, -1);
+    LIMITED(0, 0, 1, 5, 1),
+    SMALL(1, 5, 10, 15, 2),
+    MEDIUM(10, 15, 50, 60, 3),
+    LARGE(50, 60, 75, 85, 5),
+    IMPORTANT(75, 85, 100, 100, -1);
 
     public int ascentStart, ascentEnd, descentStart, descentEnd, metamorphosisArea;
 
@@ -59,7 +58,7 @@ public enum MetamorphosisType {
                 if (pourcent >= mt.ascentEnd && pourcent <= mt.descentStart) return mt;
 
                 boolean ascent = pourcent >= mt.ascentStart && pourcent <= mt.ascentEnd;
-                double mean = (mt.ascentStart + mt.ascentEnd)/2.0f;
+                double mean = (mt.ascentStart + mt.ascentEnd) / 2.0f;
 
                 // If the pourcent is in the ascent of the current value
                 if (ascent && mean <= pourcent) return mt;

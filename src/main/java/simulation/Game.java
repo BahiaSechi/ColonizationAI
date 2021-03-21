@@ -12,7 +12,6 @@
  * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
  * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
  * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
- *
  * @date February 2021
  * @file Game.java
  * @version 1.0
@@ -22,7 +21,6 @@ package simulation;
 
 import simulation.planet.Planet;
 import simulation.planet.exception.MissingTileTypeException;
-import simulation.planet.tiles.TileType;
 import simulation.robots.Pos;
 import simulation.robots.RobotController;
 import simulation.robots.RobotFactory;

@@ -1,4 +1,4 @@
 package simulation.robots.storages;
 
-public class BigBag implements Storage{
+public class BigBag implements Storage {
 }
