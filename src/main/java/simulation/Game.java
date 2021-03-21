@@ -33,12 +33,15 @@ public class Game {
     public Game() {
 
         planet = new Planet();
+        robotController = new RobotController(new Pos(10, 10));
 
         try {
             planet.initialize();
         } catch (MissingTileTypeException e) {
             e.printStackTrace();
         }
+
+
 
         int aId = 0;
         robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0)));
