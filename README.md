@@ -14,3 +14,4 @@ Move in the root directory and run the following commands :
 1. ``mvn compile``
 2. ``mvn javafx:run``
 
+Another way to run the project is to open IntelliJ and run the class **StarterGUI.java**.
