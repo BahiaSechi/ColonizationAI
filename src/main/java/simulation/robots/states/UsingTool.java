@@ -4,7 +4,6 @@ import javafx.util.Pair;
 import simulation.robots.OperatorRobot;
 import simulation.robots.Pos;
 import simulation.robots.Robot;
-import simulation.robots.moves.Action;
 import simulation.robots.moves.MoveStrategy;
 import simulation.robots.tools.Tool;
 
@@ -22,7 +21,6 @@ public class UsingTool extends State {
     @Override
     public Pair<Integer, Optional<State>> nextMove(Robot robot) {
         MoveStrategy strat = robot.getMovement();
-        Pair<Pos, Action> pair;
         int quality = 0;
         OperatorRobot operator = robot.getController().getOperator();
         Tool tool = robot.getTool();
