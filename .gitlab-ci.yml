@@ -2,7 +2,7 @@ image: maven:latest
 
 stages:
   - build
-  - package
+  - run
 
 cache:
   paths:
@@ -16,7 +16,7 @@ build:
     - merge_requests
   when: always
 
-package:
+run:
   script:
     - mvn package
   only:
