@@ -45,6 +45,7 @@ public class TileFactory {
     public Tile createTile(int x, int y, int tileWidth, int tileHeight, TileType tileType) {
         Exploitability exploitability = new NotExploitable();
         List<Metamorphosis> metamorphosis = new LinkedList<>();
+        TileType afterTotalExploit = null;
 
         // Exploitability
         switch (tileType) {
@@ -106,7 +107,17 @@ public class TileFactory {
                 break;
         }
 
-        return new Tile(x, y, tileWidth, tileHeight, tileType, exploitability, metamorphosis);
+        // Final Form
+        switch (tileType) {
+            case WATER:
+                afterTotalExploit = TileType.DESERT;
+                break;
+            case ORE:
+                afterTotalExploit = TileType.BEDROCK;
+                break;
+        }
+
+        return new Tile(x, y, tileWidth, tileHeight, tileType, exploitability, metamorphosis, afterTotalExploit);
     }
 
 }

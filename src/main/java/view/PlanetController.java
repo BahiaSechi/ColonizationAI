@@ -20,6 +20,7 @@
 
 package view;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -33,6 +34,7 @@ import simulation.planet.Planet;
 import simulation.Game;
 import simulation.planet.tiles.Tile;
 import simulation.planet.tiles.TileType;
+import simulation.robots.Pos;
 
 public class PlanetController extends Application {
 
@@ -50,36 +52,44 @@ public class PlanetController extends Application {
         GridPane gridpane = new GridPane();
         Game game = new Game();
         Planet planet = game.getPlanet();
-        Tile[][] tile = planet.getMap();
 
         stage.show();
         Scene scene = new Scene(gridpane, 24 * planet.getSIZE_X(), 24 * planet.getSIZE_Y());
         stage.setScene(scene);
 
-        for (int lifeTime=0 ; lifeTime<20 ; lifeTime++) {
-            // RUN THE ROBOTS
-
-            // RUN THE PLANET
-            planet.consumeResourcesOnRandomCase(TileType.WATER, 500);
-            planet.consumeResourcesOnRandomCase(TileType.ORE, 5);
-            planet.update();
-
-            // SHOW THE SCENE
-            gridpane.getChildren().clear();
-            for (int i = 0; i < planet.getSIZE_Y(); i++) {
-                for (int j = 0; j < planet.getSIZE_X(); j++) {
-
-                    Image img = new Image(tile[j][i].getType().getNameFile());
-
-                    ImageView imgView = new ImageView();
-                    imgView.setFitHeight(24);
-                    imgView.setFitWidth(24);
-                    imgView.setImage(img);
-                    GridPane.setConstraints(imgView, i, j);
-                    gridpane.getChildren().addAll(imgView);
-                }
+        new AnimationTimer()
+        {
+            public void handle(long currentNanoTime)
+            {
+                runLap(planet, gridpane);
             }
+        }.start();
+    }
 
+    private void runLap(Planet planet, GridPane gridpane) {
+
+        Tile[][] tile = planet.getMap();
+
+        // RUN THE ROBOTS
+
+
+        // RUN THE PLANET
+        planet.update();
+
+        // SHOW THE SCENE
+        gridpane.getChildren().clear();
+        for (int i = 0; i < planet.getSIZE_Y(); i++) {
+            for (int j = 0; j < planet.getSIZE_X(); j++) {
+
+                Image img = new Image(tile[j][i].getType().getNameFile());
+
+                ImageView imgView = new ImageView();
+                imgView.setFitHeight(24);
+                imgView.setFitWidth(24);
+                imgView.setImage(img);
+                GridPane.setConstraints(imgView, i, j);
+                gridpane.getChildren().addAll(imgView);
+            }
         }
     }
 
