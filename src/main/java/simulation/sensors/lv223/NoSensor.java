@@ -22,6 +22,9 @@ package simulation.sensors.lv223;
 import simulation.planet.tiles.Tile;
 import simulation.robots.Pos;
 
+/**
+ *
+ */
 public class NoSensor extends ViewSensor {
     @Override
     public float getExploitationLevel(Pos pos) {

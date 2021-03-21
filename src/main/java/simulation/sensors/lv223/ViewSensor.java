@@ -28,6 +28,9 @@ import simulation.robots.Robot;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ *
+ */
 public abstract class ViewSensor {
     protected Planet planet;
 

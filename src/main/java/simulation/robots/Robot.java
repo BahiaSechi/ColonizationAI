@@ -37,6 +37,9 @@ public class Robot {
     @Setter
     private Tool         tool;
 
+    /**
+     *
+     */
     @Getter
     @Setter
     private RobotType type;

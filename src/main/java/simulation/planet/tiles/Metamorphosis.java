@@ -19,6 +19,9 @@
 
 package simulation.planet.tiles;
 
+/**
+ *
+ */
 public class Metamorphosis {
 
     public TileType tiletype;

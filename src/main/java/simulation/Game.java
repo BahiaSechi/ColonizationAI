@@ -34,6 +34,9 @@ public class Game {
     @Getter
     private RobotController robotController;
 
+    /**
+     *
+     */
     public Game() {
 
         planet = new Planet();

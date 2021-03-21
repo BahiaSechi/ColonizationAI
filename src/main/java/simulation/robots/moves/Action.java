@@ -1,5 +1,8 @@
 package simulation.robots.moves;
 
+/**
+ *
+ */
 public enum Action {
     MOVE_UP(0),
     MOVE_DOWN(1),

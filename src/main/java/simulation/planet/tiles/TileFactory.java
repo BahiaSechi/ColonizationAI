@@ -26,6 +26,9 @@ import simulation.planet.exploitability.NotExploitable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ *
+ */
 public class TileFactory {
     public TileFactory() {
 
