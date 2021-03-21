@@ -27,6 +27,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ *
+ */
 @Data
 public class Tile extends ObservableTile {
 

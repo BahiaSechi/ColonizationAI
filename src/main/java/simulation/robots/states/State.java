@@ -9,6 +9,9 @@ import simulation.robots.Robot;
 
 import java.util.Optional;
 
+/**
+ *
+ */
 public abstract class State {
     @Getter(onMethod_ = {@Synchronized})
     @Setter(onMethod_ = {@Synchronized})

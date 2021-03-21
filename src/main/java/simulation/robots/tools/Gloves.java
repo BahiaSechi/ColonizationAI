@@ -6,6 +6,9 @@ import simulation.robots.Pos;
 import simulation.robots.Robot;
 
 public class Gloves extends Tool {
+    /**
+     * @param robot
+     */
     @Override
     public void use(Robot robot) {
         Pos pos = robot.getState().getPos();

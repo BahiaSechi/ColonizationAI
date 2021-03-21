@@ -2,6 +2,9 @@ package simulation.robots;
 
 import lombok.Getter;
 
+/**
+ *
+ */
 public enum RobotType {
     EXTRACTOR("/sprites/robot/ORE_ROBOT.png"),
     PIPELINER("/sprites/robot/WATER_ROBOT.png"),

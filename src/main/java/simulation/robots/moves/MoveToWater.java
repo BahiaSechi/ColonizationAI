@@ -6,6 +6,9 @@ import simulation.robots.Pos;
 import simulation.robots.Robot;
 import simulation.robots.states.State;
 
+/**
+ *
+ */
 public class MoveToWater extends MoveStrategy {
     @Override
     public Pair<Pos, Action> bestMove(Robot robot) {

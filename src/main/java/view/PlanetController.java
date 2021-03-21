@@ -43,6 +43,9 @@ public class PlanetController extends Application {
         launch(args);
     }
 
+    /**
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
 
@@ -73,6 +76,11 @@ public class PlanetController extends Application {
         }.start();
     }
 
+    /**
+     * @param planet
+     * @param gridpane
+     * @param robotMap
+     */
     private void generateView(Planet planet, GridPane gridpane, Map<Integer, Robot> robotMap) {
 
         Tile[][] tile = planet.getMap();

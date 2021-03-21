@@ -40,6 +40,10 @@ public enum TileType {
     private final String              nameFile;
     private       List<Metamorphosis> metamorphoses;
 
+    /**
+     * @param number
+     * @param nameFile
+     */
     TileType(int number, String nameFile) {
         this.number = number;
         this.nameFile = nameFile;

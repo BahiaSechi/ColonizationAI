@@ -10,6 +10,9 @@ import simulation.robots.tools.*;
 import simulation.sensors.lv223.NoSensor;
 import simulation.sensors.lv223.ViewSensor;
 
+/**
+ *
+ */
 public class OperatorRobot extends Robot {
 
     @Getter

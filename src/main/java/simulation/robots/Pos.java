@@ -2,6 +2,9 @@ package simulation.robots;
 
 import lombok.Data;
 
+/**
+ *
+ */
 @Data
 public class Pos {
     private int x;
