@@ -1,3 +1,23 @@
+/**
+ * Address :
+ * ENSICAEN
+ * 6 Boulevard Marechal Juin
+ * F-14050 Caen Cedex
+ * Note :
+ * This file is owned by an ENSICAEN student.  No portion of this
+ * document may be reproduced, copied  or revised without written
+ * permission of the authors.
+ *
+ * @author PRUNIER Bastien <bastien.prunier@ecole.ensicaen.fr>
+ * @author RABOTIN Mateo <mateo.rabotin@ecole.ensicaen.fr>
+ * @author SECHI Bahia <bahia.sechi@ecole.ensicaen.fr>
+ * @author SERVAT Clement <clement.servat@ecole.ensicaen.fr>
+ *
+ * @date February 2021
+ * @file Planet.java
+ * @version 1.0
+ */
+
 package simulation.planet;
 
 import com.fuzzylite.Engine;
@@ -144,7 +164,6 @@ public class Planet implements Observer {
         }
 
         this.recentlyChangedTiles.clear();
-
     }
 
     private void analyseFuzzyLogicOutPut(double metamorphosisPourcentage) {
@@ -164,6 +183,11 @@ public class Planet implements Observer {
         }
     }
 
+    /**
+     *
+     * @param type
+     * @param amount
+     */
     public void consumeResourcesOnRandomCase(TileType type, int amount) {
         for (int y = 0; y < SIZE_Y; y++) {
             for (int x = 0; x < SIZE_X; x++) {
@@ -176,14 +200,34 @@ public class Planet implements Observer {
         }
     }
 
+    /**
+     * A getter function to find the tile according to x and y.
+     * @param x Abscissa axis.
+     * @param y Ordinate axis.
+     * @return The tile on the position (x,y).
+     */
     public Tile getTile(int x, int y) {
         return this.map[y][x];
     }
 
+    /**
+     * A function to get the neighbors of a tile according to a given position.
+     * @param position The position of the tile.
+     * @param degree The number of neighbors we want to get.
+     * @return A list of the tiles surrounding our tile according to the degree.
+     */
     public List<Tile> getSurrounding(Pos position, int degree) {
         return getSurrounding(map[position.getY()][position.getX()], degree);
     }
 
+    /**
+     * A function to get the neighbors of a tile.
+     * @param tile The tile we are looking at.
+     * @param degree The number of neighbors we want to get. If it is degree 2, we get 8 neighbors of our tile and their
+     *               neighbors.
+     * @return A list of the tiles surrounding our tile according to the degree. Example : Degree = 1 ; We get the 8
+     * neighbors.
+     */
     public List<Tile> getSurrounding(Tile tile, int degree) {
         List<Tile> tilesAround = new LinkedList<>();
 
