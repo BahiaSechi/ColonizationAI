@@ -44,16 +44,28 @@ public enum MetamorphosisType {
     MetamorphosisType(int ascentStart, int ascentEnd, int descentStart, int descentStop, int metamorphosisArea) {
 package simulation.planet.tiles;
 
+/**
+ * Describe the shape of the membership function graph for the metamorphosis.
+ */
 public enum MetamorphosisType {
-    LIMITED(0,0,1,5),
-    SMALL(1,5,10,15),
-    MEDIUM(10,15,50,60),
-    LARGE(50,60,75,85),
-    IMPORTANT(75,85,100,100);
+    LIMITED(0,0,1,5, 1),
+    SMALL(1,5,10,15, 2),
+    MEDIUM(10,15,50,60, 3),
+    LARGE(50,60,75,85, 5),
+    IMPORTANT(75,85,100,100, -1);
 
-    public int ascentStart, ascentEnd, descentStart, descentEnd;
+    public int ascentStart, ascentEnd, descentStart, descentEnd, metamorphosisArea;
 
-    MetamorphosisType(int ascentStart, int ascentEnd, int descentStart, int descentStop) {
+    /**
+     * Constructor.
+     *
+     * @param ascentStart When the variable start its ascent.
+     * @param ascentEnd When the variable has arrived at it's top.
+     * @param descentStart When the variable has start to descent.
+     * @param descentStop When the variable is shut off.
+     * @param metamorphosisArea The zone around the tile that will be modified.
+     */
+    MetamorphosisType(int ascentStart, int ascentEnd, int descentStart, int descentStop, int metamorphosisArea) {
         this.ascentStart = ascentStart;
         this.ascentEnd = ascentEnd;
         this.descentStart = descentStart;
