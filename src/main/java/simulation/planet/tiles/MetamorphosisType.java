@@ -48,6 +48,12 @@ public enum MetamorphosisType {
         this.metamorphosisArea = metamorphosisArea;
     }
 
+    /**
+     * Find the type of Metamorphosis thanks to a pourcentage.
+     *
+     * @param pourcent The pourcent.
+     * @return The type.
+     */
     public static MetamorphosisType getMetamorphosisType(double pourcent) {
         MetamorphosisType previous = null;
 
