@@ -37,13 +37,18 @@ public class Robot {
     @Setter
     private Tool         tool;
 
-    public Robot(int id, MoveStrategy movement, RobotController controller, State state, float epsilon, ViewSensor viewSensor) {
+    @Getter
+    @Setter
+    private RobotType type;
+
+    public Robot(int id, MoveStrategy movement, RobotController controller, State state, float epsilon, ViewSensor viewSensor, RobotType type) {
         this.id = id;
         this.movement = movement;
         this.controller = controller;
         this.state = state;
         this.epsilon = epsilon;
         this.viewSensor = viewSensor;
+        this.type = type;
     }
 
     /**
