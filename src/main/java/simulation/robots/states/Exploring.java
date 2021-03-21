@@ -37,7 +37,8 @@ public class Exploring extends State {
         ViewSensor sensor = robot.getViewSensor();
         int quality;
         Pos absolutePos = robot.getController().getAbsolutePos(robot);
-        if (absolutePos.getX() < 21 && absolutePos.getY() < 21 && !sensor.isAnObstacle(absolutePos)) {
+        if (absolutePos.getX() >= 0 && absolutePos.getY() >= 0 && absolutePos.getX() < 21
+                && absolutePos.getY() < 21 && !sensor.isAnObstacle(absolutePos)) {
             this.setPos(pair.getKey());
             quality = sensor.ratePos(robot);
         } else {

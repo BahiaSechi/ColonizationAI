@@ -60,7 +60,11 @@ public abstract class ViewSensor {
 
     public double isCurrentExploitable(Robot robot) {
         Pos absolutePos = robot.getController().getAbsolutePos(robot);
-        return isExploitable(planet.getTile(absolutePos.getX(), absolutePos.getY()));
+        if (absolutePos.getX() >= 0 && absolutePos.getY() >= 0
+                && absolutePos.getX() < 21 && absolutePos.getY() < 21 ) {
+            return isExploitable(planet.getTile(absolutePos.getX(), absolutePos.getY()));
+        }
+        return 0.0;
     }
 
     abstract double isExploitable(Tile tile);

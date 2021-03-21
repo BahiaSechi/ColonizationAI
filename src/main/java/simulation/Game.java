@@ -48,7 +48,16 @@ public class Game {
         }
 
         int aId = 0;
-        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+        robotController.addRobot(aId, RobotFactory.createExtractorRobot(robotController, aId++, new Pos(0, 0), planet));
+
     }
 
     /**

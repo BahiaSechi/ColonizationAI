@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import simulation.Game;
 import simulation.planet.Planet;
 import simulation.planet.tiles.Tile;
+import simulation.robots.Pos;
 import simulation.robots.Robot;
 
 import java.util.Map;
@@ -67,7 +68,7 @@ public class PlanetController extends Application {
             public void handle(long currentNanoTime) {
                 if (this.dayDecount >= 0) {
                     game.runDay();
-                    generateView(planet, gridpane, robotMap);
+                    generateView(planet, gridpane, robotMap, game);
                     dayDecount--;
                 } else {
                     this.stop();
@@ -81,7 +82,7 @@ public class PlanetController extends Application {
      * @param gridpane
      * @param robotMap
      */
-    private void generateView(Planet planet, GridPane gridpane, Map<Integer, Robot> robotMap) {
+    private void generateView(Planet planet, GridPane gridpane, Map<Integer, Robot> robotMap, Game game) {
 
         Tile[][] tile = planet.getMap();
 
@@ -108,8 +109,10 @@ public class PlanetController extends Application {
             String fileName = rob.getType().getNameFile();
             Image img = new Image(fileName);
 
-            int posX = rob.getState().getPos().getX();
-            int posY = rob.getState().getPos().getY();
+            Pos pos = game.getRobotController().getAbsolutePos(rob);
+
+            int posX = pos.getX();
+            int posY = pos.getY();
 
             ImageView imgV = new ImageView();
 
