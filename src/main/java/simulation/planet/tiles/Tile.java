@@ -9,8 +9,8 @@ import java.util.Random;
 public class Tile extends ObservableTile {
 
     private int tileX, tileY, tileWidth, tileHeight;
-    private TileType type;
-    private Exploitability exploitability;
+    private TileType            type;
+    private Exploitability      exploitability;
     private List<Metamorphosis> metamorphoses;
 
     // Constructor
@@ -24,10 +24,28 @@ public class Tile extends ObservableTile {
         this.exploitability = exploitability;
         this.metamorphoses = metamorphoses;
         this.metamorphoses.sort(Comparator.comparing(m -> m.percentage));
+        // Sort the metamorphoses possibilities, this way we can directly draw a random number and compare it to the
+        // percentages.
     }
 
-    // TODO Implement exploit
-    public void exploit() {}
+    //
+    /**
+     * Extract the specified resources.
+     *
+     * TODO Implement BETTER exploit
+     *
+     * @param amount The amount of resources to extract.
+     * @return The amount left to extract if there not enough left of resources.
+     */
+    public int exploit(int amount) {
+        if (this.exploitability.getMax() != 0) {
+            int oldCurrent = this.exploitability.getCurrent();
+            int newCurrent = oldCurrent - amount;
+            this.exploitability.setCurrent(Math.max(newCurrent, 0));
+            return oldCurrent<amount ? amount-oldCurrent : 0;
+        }
+        return amount;
+    }
 
     // Getters & Setters
 
@@ -71,13 +89,23 @@ public class Tile extends ObservableTile {
         this.type = type;
     }
 
+    public Exploitability getExploitability() {
+        return exploitability;
+    }
+
+    /**
+     * Method using the state pattern design. A Tile, when metamorphosing, can transform in certain type of tile with
+     * certain percentage. This method is choosing the next type of cell.
+     *
+     * @return The chosen tileType
+     */
     public TileType nextTile() {
         // Find a random number to find the next tile
         Random r = new Random();
         int low = 0;
         int high = 10000;
-        int tmpResult = r.nextInt(high-low) + low;
-        float result = tmpResult/100.0f;
+        int tmpResult = r.nextInt(high - low) + low;
+        float result = tmpResult / 100.0f;
 
         TileType tileType = this.type;
 

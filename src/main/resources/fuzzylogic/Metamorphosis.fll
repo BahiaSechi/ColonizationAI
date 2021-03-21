@@ -1,47 +1,47 @@
-# File: Metamorphosis.fll
 Engine: Metamorphosis
-description: An engine to allow tiles to change according to the amount of ore and water extracted.
 InputVariable: sampledOre
-    enabled: true
-    range: 0.000 1.000
-    term: small Ramp 0.000 1.000 10.000 1.000 20.000 0.000
-    term: medium Ramp 0.000 0.000 10.000 0.000 20.000 1.000 40.000 1.000 60.000 0.000
-    term: large Ramp 0.000 0.000 40.000 0.000 60.000 1.000
+  enabled: true
+  range: 0 100
+  lock-range: false
+  term: small Trapezoid 0 0 10 20
+  term: medium Trapezoid 10 20 40 60
+  term: large Trapezoid 40 60 100 400
 InputVariable: drawnedWater
-    enabled: true
-    range: 0.000 1.000
-    term: insignificant Ramp 0.000 1.000 8.000 1.000 14.000 0.000
-    term: small Ramp 0.000 0.000 8.000 0.000 14.000 1.000 36.000 1.000 44.000 0.000
-    term: medium Ramp 0.000 0.000 36.000 0.000 44.000 1.000 66.000 1.000 72.000 0.000
-    term: large Ramp 0.000 0.000 66.000 0.000 72.000 1.000
+  enabled: true
+  range: 0 100
+  lock-range: false
+  term: insignificant Trapezoid 0 0 8 14
+  term: small Trapezoid 8 14 36 44
+  term: medium Trapezoid 36 44 66 72
+  term: large Trapezoid 66 72 100 1000
 OutputVariable: metamorphosis
-    enabled: true
-    range: 0.000 1.000
-    aggregation:
-    defuzzifier: Centroid 100
-    default: 0.000
-    lock-valid: false
-    lock-range: false
-    term: limited Ramp 0.000 1.000 1.000 1.000 5.000 0.000
-    term: small Ramp 0.000 0.000 1.000 0.000 5.000 1.000 10.000 1.000 15.000 0.000
-    term: medium Ramp 0.000 0.000 10.000 0.000 15.000 1.000 50.000 1.000 60.000 0.000
-    term: large Ramp 0.000 0.000 50.000 0.000 60.000 1.000 75.000 1.000 85.000 0.000
-    term: important Ramp 0.000 0.000 75.000 0.000 85.000 1.000
-RuleBlock: metaRules
-    enabled: true
-    conjunction: none
-    disjunction: none
-    implication: none
-    activation: General
-    rule: if sampledOre is small and drawnedWater is insignificant then metamorphosis is limited
-    rule: if sampledOre is small and drawnedWater is small then metamorphosis is small
-    rule: if sampledOre is small and drawnedWater is medium then metamorphosis is small
-    rule: if sampledOre is small and drawnedWater is large then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is insignificant then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is small then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is medium then metamorphosis is medium
-    rule: if sampledOre is medium and drawnedWater is large then metamorphosis is medium
-    rule: if sampledOre is large and drawnedWater is insignificant then metamorphosis is large
-    rule: if sampledOre is large and drawnedWater is small then metamorphosis is large
-    rule: if sampledOre is large and drawnedWater is medium then metamorphosis is important
-    rule: if sampledOre is large and drawnedWater is large then metamorphosis is important
+  enabled: true
+  range: 0 100
+  lock-range: false
+  aggregation: Maximum
+  defuzzifier: SmallestOfMaximum 100
+  default: nan
+  lock-previous: false
+  term: limited Trapezoid 0 0 5 15
+  term: small Trapezoid 1 5 10 15
+  term: medium Trapezoid 10 15 50 60
+  term: large Trapezoid 50 60 75 85
+  term: important Trapezoid 75 85 100 100
+RuleBlock: mamdani
+  enabled: true
+  conjunction: AlgebraicProduct
+  disjunction: none
+  implication: AlgebraicProduct
+  activation: General
+  rule: if sampledOre is small and drawnedWater is insignificant then metamorphosis is limited
+  rule: if sampledOre is small and drawnedWater is small then metamorphosis is small
+  rule: if sampledOre is small and drawnedWater is medium then metamorphosis is small
+  rule: if sampledOre is small and drawnedWater is large then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is insignificant then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is small then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is medium then metamorphosis is medium
+  rule: if sampledOre is medium and drawnedWater is large then metamorphosis is medium
+  rule: if sampledOre is large and drawnedWater is insignificant then metamorphosis is large
+  rule: if sampledOre is large and drawnedWater is small then metamorphosis is large
+  rule: if sampledOre is large and drawnedWater is medium then metamorphosis is important
+  rule: if sampledOre is large and drawnedWater is large then metamorphosis is important

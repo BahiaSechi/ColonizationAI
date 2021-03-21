@@ -2,9 +2,7 @@ package simulation;
 
 import simulation.planet.Planet;
 import simulation.planet.exception.MissingTileTypeException;
-import simulation.robots.Pos;
-import simulation.robots.RobotController;
-import simulation.robots.RobotFactory;
+import simulation.planet.tiles.TileType;
 
 public class Game {
 
@@ -20,13 +18,16 @@ public class Game {
             e.printStackTrace();
         }
 
-        RobotController controller = new RobotController(new Pos(12, 12));
-        int aId = 1;
-        controller.addRobot(aId, RobotFactory.createExtractorRobot(controller, aId++, new Pos(0, 0)));
-        controller.addRobot(aId, RobotFactory.createExtractorRobot(controller, aId++, new Pos(0, 0)));
-        controller.addRobot(aId, RobotFactory.createPipelinerRobot(controller, aId++, new Pos(0, 0)));
+        for (int i=0 ; i<20 ; i++) {
+            planet.consumeResourcesOnRandomCase(TileType.WATER, 500);
+            planet.consumeResourcesOnRandomCase(TileType.ORE, 5);
+            planet.update();
+        }
+
     }
 
-    public Planet getPlanet() { return planet; }
+    public Planet getPlanet() {
+        return planet;
+    }
 }
 

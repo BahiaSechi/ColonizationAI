@@ -12,6 +12,16 @@ public class TileFactory {
 
     }
 
+    /**
+     * Standard method to create a specific type of tile.
+     *
+     * @param x The horizontal coordinate of the tile.
+     * @param y The vertical coordinate of the tile.
+     * @param tileWidth The width of the tile.
+     * @param tileHeight The height of the tile.
+     * @param tileType The type of the tile.
+     * @return The specified type of tile with its attributes.
+     */
     public Tile createTile(int x, int y, int tileWidth, int tileHeight, TileType tileType) {
         Exploitability exploitability = new NotExploitable();
         List<Metamorphosis> metamorphosis = new LinkedList<>();
