@@ -153,6 +153,9 @@ public class Planet implements Observer {
         FuzzyLite.logger().info(String.format(
                 "obstacle.input = %s -> steer.output = %s",
                 Op.str(drawnedWater), Op.str(meta.getValue())));
+        //meta.fuzzyOutputValue()
+        analyseFuzzyLogicOutPut(meta.getValue());
+
 
         analyseFuzzyLogicOutPut(meta.getValue());
 

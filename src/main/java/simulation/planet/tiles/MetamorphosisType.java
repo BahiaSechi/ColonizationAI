@@ -42,6 +42,18 @@ public enum MetamorphosisType {
      * @param metamorphosisArea The zone around the tile that will be modified.
      */
     MetamorphosisType(int ascentStart, int ascentEnd, int descentStart, int descentStop, int metamorphosisArea) {
+package simulation.planet.tiles;
+
+public enum MetamorphosisType {
+    LIMITED(0,0,1,5),
+    SMALL(1,5,10,15),
+    MEDIUM(10,15,50,60),
+    LARGE(50,60,75,85),
+    IMPORTANT(75,85,100,100);
+
+    public int ascentStart, ascentEnd, descentStart, descentEnd;
+
+    MetamorphosisType(int ascentStart, int ascentEnd, int descentStart, int descentStop) {
         this.ascentStart = ascentStart;
         this.ascentEnd = ascentEnd;
         this.descentStart = descentStart;
