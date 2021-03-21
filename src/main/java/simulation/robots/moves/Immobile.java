@@ -1,14 +1,12 @@
 package simulation.robots.moves;
 
+import javafx.util.Pair;
 import simulation.robots.Pos;
-
-import java.util.LinkedList;
-import java.util.List;
+import simulation.robots.Robot;
 
 public class Immobile extends MoveStrategy {
     @Override
-    public List<Pos> findNewPath() {
-        //return new List.of(null);
-        return new LinkedList<>();
+    public Pair<Pos, Action> bestMove(Robot robot) {
+        return new Pair<>(robot.getState().getPos(), null);
     }
 }
