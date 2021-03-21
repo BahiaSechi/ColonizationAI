@@ -25,5 +25,6 @@ run:
         - merge_requests
     when: always
     artifacts:
+        name: Fichier binaire de l'application
         paths:
             - target/colonisation_prunier_rabotin_sechi_servat-1.0.jar
